@@ -1,6 +1,6 @@
 export const projects = [
   {
-    id: "010",
+    id: "0120",
     name: "Compere",
     description:
       "A collection of user interface designs showcasing various styles and concepts.",
@@ -14,7 +14,7 @@ export const projects = [
     image: "/assets/projects/ui-designs.png",
   },
   {
-    id: "010",
+    id: "013",
     name: "Compere",
     description:
       "A collection of user interface designs showcasing various styles and concepts.",

@@ -22,7 +22,7 @@ export default function Navbar() {
       initial={false}
       animate={{
         backgroundColor: scrolled ? "#ffffff" : "transparent",
-        boxShadow: scrolled ? "0 4px 12px rgba(0, 0, 0, 0.05)" : "none",
+        // boxShadow: scrolled ? "0 2px 12px rgba(0, 0, 0, 0.05)" : "none",
       }}
       transition={{ duration: 0.3 }}
       className="fixed top-0 left-0 w-full z-50 backdrop-blur-sm px-6 py-4"

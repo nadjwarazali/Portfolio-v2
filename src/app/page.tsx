@@ -47,17 +47,17 @@ export default function Home() {
                       {selectedFolder.label}
                     </span>
                   </p>
-                  <h1 className="pt-10 pb-5 font-bold">Featured Projects</h1>
+                  <h1 className="pt-5 pb-2 font-bold">Featured Projects</h1>
                   <div className="flex flex-row w-full">
                     {projects.map((project) => (
                       <div
                         key={project.id}
-                        className="w-1/3 p-2 border border-gray-200 rounded-lg m-2"
+                        className="w-1/3 h-70 p-2 border border-gray-200 rounded-lg m-2 cursor-pointer hover:shadow-lg transition-shadow duration-200"
                       >
                         <img
                           src={project.image}
                           alt={project.name}
-                          className="w-full h-auto rounded-lg"
+                          className="w-full h-2/3 rounded-lg"
                         />
                         <h2 className="text-lg font-semibold mt-2">
                           {project.name}
