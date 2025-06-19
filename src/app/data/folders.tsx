@@ -1,13 +1,17 @@
 // data/folderTabs.js
 export const folderTabs: Folder[] = [
-  { tab: "O", id: "010", label: "UI Designs", titlePosition: 29 },
-  { tab: "Y", id: "011", label: "Mobile Apps", titlePosition: 44 },
-  { tab: "P", id: "012", label: "Web", titlePosition: 64 },
-  { tab: "R", id: "002", label: "Branding", titlePosition: 35 },
   {
-    tab: "S",
-    id: "021",
-    label: "Others",
-    titlePosition: 54,
+    id: "01",
+    label: "Compere",
+    categories: "Brand & Product Design",
+    titlePosition: 28,
   },
+  { id: "02", label: "AWSC", categories: "Mobile App UI", titlePosition: 44 },
+  {
+    id: "03",
+    label: "Uncle Sambal",
+    categories: "Branding",
+    titlePosition: 64,
+  },
+  { id: "04", label: "Logo Work", categories: "Others", titlePosition: 35 },
 ];

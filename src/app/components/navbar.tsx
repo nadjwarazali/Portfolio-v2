@@ -3,54 +3,50 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
-export default function Navbar() {
-  const [isOpen, setIsOpen] = useState(false);
+type NavbarProps = {
+  scrollRef: React.RefObject<any>;
+};
+export default function Navbar({ scrollRef }: NavbarProps) {
+  const parallaxRef = scrollRef;
 
-  const [scrolled, setScrolled] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 50);
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  const [showNavbar, setShowNavbar] = useState(true);
 
   return (
     <motion.nav
       initial={false}
       animate={{
-        backgroundColor: scrolled ? "#ffffff" : "transparent",
-        // boxShadow: scrolled ? "0 2px 12px rgba(0, 0, 0, 0.05)" : "none",
+        y: showNavbar ? 0 : -100,
       }}
       transition={{ duration: 0.3 }}
-      className="fixed top-0 left-0 w-full z-50 backdrop-blur-sm px-6 py-4"
+      className="fixed top-0 left-0 w-full z-50 backdrop-blur-md px-6 py-4"
     >
       <div className="mx-10 px-4">
-        <div className="flex justify-between items-center h-10">
-          <Link href="/">
+        <div className="flex justify-between items-center h-10 ">
+          <button
+            className="cursor-pointer"
+            onClick={() => parallaxRef.current.scrollTo(0)}
+          >
             <img src="/assets/logo-temp.svg"></img>
-          </Link>
+          </button>
           <div className="hidden md:flex space-x-14">
-            <Link
-              href="#about"
-              className="font-mono text-md hover:text-blue-600"
-            >
-              ABOUT
-            </Link>
-            <Link
-              href="#projects"
-              className="font-mono text-md hover:text-blue-600"
+            <button
+              onClick={() => parallaxRef.current.scrollTo(0.25)}
+              className="cursor-pointer font-mono text-md hover:text-[#0022FF]"
             >
               PROJECTS
-            </Link>
-            <Link
-              href="#contact"
-              className="font-mono text-md hover:text-blue-600"
+            </button>
+            <button
+              onClick={() => parallaxRef.current.scrollTo(1.2)}
+              className="cursor-pointer font-mono text-md hover:text-[#0022FF]"
+            >
+              ABOUT
+            </button>
+            <button
+              onClick={() => parallaxRef.current.scrollTo(2)}
+              className="cursor-pointer font-mono text-md hover:text-[#0022FF]"
             >
               CONTACT
-            </Link>
+            </button>
           </div>
 
           {/* <div className="md:hidden flex items-center">
@@ -62,7 +58,7 @@ export default function Navbar() {
       </div>
 
       {/* Mobile Menu */}
-      {isOpen && (
+      {/* {isOpen && (
         <div className="md:hidden bg-white px-4 pt-2 pb-4 space-y-2">
           <Link href="/" className="block hover:text-blue-600">
             Home
@@ -77,7 +73,7 @@ export default function Navbar() {
             Contact
           </Link>
         </div>
-      )}
+      )} */}
     </motion.nav>
   );
 }
