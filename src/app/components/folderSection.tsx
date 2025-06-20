@@ -4,13 +4,6 @@ import { useState } from "react";
 import { folderTabs } from "../data/folders";
 import dynamic from "next/dynamic";
 
-// const pageComponents: Record<string, any> = {
-//   compere: dynamic(() => import("../projects/compere/page").then(mod => mod.Compere)),
-//   awsc: dynamic(() => import("../projects/awsc/page").then(mod => mod.default)),
-//   uncleSambal: dynamic(() => import("../projects/uncleSambal/page").then(mod => mod.default)),
-//   logo: dynamic(() => import("../projects/logo/page").then(mod => mod.default)),
-// };
-
 export const FolderSection = () => {
   const [selectedFolder, setSelectedFolder] = useState<Folder>(folderTabs[0]);
   const [hoverId, setHoverId] = useState<string | null>(null);
@@ -77,7 +70,7 @@ export const FolderSection = () => {
         </div>
         <AnimatePresence>
           {selectedFolder && (
-            <div className="flex justify-center absolute left-1/2 -translate-x-1/2 translate-y-100 w-full bg-white h-max-full z-10">
+            <div className="flex justify-center absolute left-1/2 -translate-x-1/2 translate-y-90 w-full bg-white h-max-full z-10">
               <motion.div
                 key={selectedFolder.id}
                 initial={{ y: 0, opacity: 0 }}
