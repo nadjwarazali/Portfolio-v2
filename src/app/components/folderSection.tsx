@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
 import { folderTabs } from "../data/folders";
 import dynamic from "next/dynamic";
+import Link from "next/link";
 
 export const FolderSection = () => {
   const [selectedFolder, setSelectedFolder] = useState<Folder>(folderTabs[0]);
@@ -53,13 +54,13 @@ export const FolderSection = () => {
                   >
                     <div className="flex flex-row">
                       {isSelected && (
-                        <div className="h-[8px] w-[8px] bg-[#0022FF] rounded-full mt-[6px] mr-2" />
+                        <div className="h-[10px] w-[10px] bg-[#0022FF] rounded-full mt-[10px] mr-2" />
                       )}
                       <div>
-                        <div className="font-bold">{tab.label}</div>
-                        <div className="text-sm text-gray-500">
+                        <div className="text-lg font-semibold">{tab.label}</div>
+                        {/* <div className="text-sm text-gray-500">
                           {tab.categories}
-                        </div>
+                        </div> */}
                       </div>
                     </div>
                   </div>
@@ -85,23 +86,28 @@ export const FolderSection = () => {
               >
                 <div className="p-10 font-mono">
                   <p className="text-xl font-bold">{selectedFolder.label}</p>
-                  <p className="font-normal text-md text-gray-500">
-                    {selectedFolder.categories}
-                  </p>
+                  {/* <p className="font-normal text-md text-gray-500"> */}
+                  {/* {selectedFolder.categories} */}
+                  {/* </p> */}
                   <div className="flex flex-row w-full py-10">
-                    <div className="w-1/3 h-70 p-2 border border-gray-200 rounded-lg m-2 cursor-pointer hover:shadow-lg transition-shadow duration-200">
-                      <img
-                        src={"project.image"}
-                        alt={"project.name"}
-                        className="w-full h-2/3 rounded-lg"
-                      />
-                      <h2 className="text-lg font-semibold mt-2">
-                        {"project.name"}
-                      </h2>
-                      <p className="text-sm text-gray-600">
-                        {"project.description"}
-                      </p>
-                    </div>
+                    <Link href={`/projects/compere`} className="w-full">
+                      <div
+                        className="w-1/3 h-70 p-2 border border-gray-200 rounded-lg m-2 cursor-pointer hover:shadow-lg transition-shadow duration-200"
+                        onClick={() => {}}
+                      >
+                        <img
+                          src={"project.image"}
+                          alt={"project.name"}
+                          className="w-full h-2/3 rounded-lg"
+                        />
+                        <h2 className="text-lg font-semibold mt-2">
+                          {"project.name"}
+                        </h2>
+                        <p className="text-sm text-gray-600">
+                          {"project.description"}
+                        </p>
+                      </div>
+                    </Link>
                   </div>
                 </div>
               </motion.div>
