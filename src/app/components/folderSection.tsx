@@ -2,16 +2,22 @@ import React from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
 import { folderTabs } from "../data/folders";
-import Link from "next/link";
-import { AboutSection } from "./aboutSection";
-import { ContactSection } from "./contactSection";
+import AboutSection from "./aboutSection";
+import ConnectSection from "./connectSection";
 import ProjectSection from "./projectSection";
 
-export const FolderSection = () => {
+type FolderSectionProp = {
+  scrollRef: React.RefObject<any>;
+};
+
+export const FolderSection = ({ scrollRef }: FolderSectionProp) => {
   const [selectedFolder, setSelectedFolder] = useState<Folder>(folderTabs[0]);
   const [hoverId, setHoverId] = useState<string | null>(null);
+  const parallaxRef = scrollRef;
 
   const handleSelect = (tab: Folder) => {
+    parallaxRef.current.scrollTo(0.25);
+
     setSelectedFolder(tab);
   };
   return (
@@ -81,13 +87,9 @@ export const FolderSection = () => {
                   stiffness: 120,
                   damping: 10,
                 }}
-                className="w-[95%] bg-white h-400 rounded-xl z-10"
+                className="w-full bg-white h-400  z-10"
               >
                 <div className="p-10 font-mono">
-                  {/* <p className="text-xl font-bold">{selectedFolder.label}</p>
-                  <p className="font-normal text-md text-gray-500">
-                    {selectedFolder.subtitle}
-                  </p> */}
                   <div>
                     {(() => {
                       switch (selectedFolder.id) {
@@ -104,7 +106,7 @@ export const FolderSection = () => {
                             </p>
                           );
                         case "04":
-                          return <ContactSection />;
+                          return <ConnectSection />;
                         default:
                           return null;
                       }

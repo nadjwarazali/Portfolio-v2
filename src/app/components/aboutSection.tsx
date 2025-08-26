@@ -1,12 +1,12 @@
 import React from "react";
 
-export const AboutSection = () => {
+export default function AboutSection() {
   return (
-    <div className="col-start-2 py-10">
+    <div className="col-start-2 py-20 px-40">
       <div className="flex flex-row items-center">
         <img src={"/assets/logo-temp.svg"} />
         <p className="text-2xl font-sans font-light pl-4 pt-2">
-          is an archive of the many projects that were shaped — from code to
+          is an archive of the many projects that were created — from code to
           canvas.
         </p>
       </div>
@@ -22,4 +22,4 @@ export const AboutSection = () => {
       </p>
     </div>
   );
-};
+}

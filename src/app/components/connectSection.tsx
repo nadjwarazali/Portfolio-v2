@@ -1,8 +1,8 @@
 import React from "react";
 
-export const ContactSection = () => {
+export default function ConnectSection() {
   return (
-    <div className="col-start-2 pt-10">
+    <div className="col-start-2 px-20">
       <div className="flex flex-row gap-20">
         <div className="bg-white w-80 rounded-2xl border border-2 border-[#0022FF] shadow-xl p-5">
           <img
@@ -44,14 +44,14 @@ export const ContactSection = () => {
           </div>
         </div>
         <div className="w-[60%]">
-          <p className="font-mono font-bold text-4xl py-10">
+          <p className="font-mono font-bold text-4xl py-5 mt-10">
             Hey! Im Jwa - designer, developer and everything nice
           </p>
           <p className="text-2xl font-sans font-light pt-2 pb-10">
             I work with codes for almost 4 years, mainly in frontend development
             and sometimes as a freelance designer. I love creating things that
-            are visually pleasing and intuitive — always aiming to build
-            thoughtful solutions for every project I touch.
+            are visually pleasing and intuitive, always aiming to build
+            thoughtful solutions for every project Im working on.
           </p>
           <a href="mailto:nadjwarazali@gmail.com">
             <button className="group flex flex-row cursor-pointer py-5 items-center">
@@ -65,4 +65,4 @@ export const ContactSection = () => {
       </div>
     </div>
   );
-};
+}

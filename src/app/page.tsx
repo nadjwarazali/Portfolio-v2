@@ -1,12 +1,8 @@
 "use client";
 import AltCutoutAnimation from "./components/titleCard";
-import Navbar from "./components/navbar";
 import { useRef } from "react";
-import { AboutSection } from "./components/aboutSection";
 import { Parallax, ParallaxLayer } from "@react-spring/parallax";
 import { FolderSection } from "./components/folderSection";
-import { start } from "repl";
-import { ContactSection } from "./components/contactSection";
 
 export default function Home() {
   const parallaxRef = useRef<any>(null);
@@ -26,7 +22,7 @@ export default function Home() {
         </ParallaxLayer>
         <ParallaxLayer offset={0.7} speed={1.5} style={{ zIndex: 10 }}>
           <section id="projects">
-            <FolderSection />
+            <FolderSection scrollRef={parallaxRef} />
           </section>
         </ParallaxLayer>
       </Parallax>

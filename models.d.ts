@@ -11,5 +11,6 @@ interface Project {
   categories: string[];
   stack?: string[];
   description?: string;
-  image?: string;
+  imgSrc?: string;
+  link?: string;
 }
