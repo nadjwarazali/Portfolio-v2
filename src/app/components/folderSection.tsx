@@ -2,8 +2,10 @@ import React from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
 import { folderTabs } from "../data/folders";
-import dynamic from "next/dynamic";
 import Link from "next/link";
+import { AboutSection } from "./aboutSection";
+import { ContactSection } from "./contactSection";
+import ProjectSection from "./projectSection";
 
 export const FolderSection = () => {
   const [selectedFolder, setSelectedFolder] = useState<Folder>(folderTabs[0]);
@@ -19,34 +21,29 @@ export const FolderSection = () => {
           {folderTabs.map((tab, i) => {
             const isHover = hoverId === tab.id;
             const isSelected = selectedFolder === tab;
-
             return (
               <div
                 key={tab.id}
                 className="absolute"
                 style={{ top: `${i * 40}px` }}
               >
-                {/* Folder */}
                 <motion.div
                   className="cursor-pointer relative z-10"
                   onHoverStart={() => setHoverId(tab.id)}
                   onHoverEnd={() => setHoverId(null)}
                   onClick={handleSelect.bind(null, tab)}
                   animate={{
-                    y: isHover ? (isSelected ? -50 : -10) : 40,
+                    y: isHover ? -10 : 30,
                   }}
                   transition={{ type: "spring", stiffness: 300, damping: 20 }}
                 >
-                  {/* Folder image */}
                   <img
                     src={`/assets/folder/folder-${i}.svg`}
                     className="w-full object-contain"
                     alt={`${tab.id}`}
                   />
-
-                  {/* Label */}
                   <div
-                    className={`absolute top-5 font-mono text-sm text-gray-800 items-center`}
+                    className={`absolute top-3 font-mono text-sm text-gray-800 items-center`}
                     style={{
                       left: `${tab.titlePosition}%`,
                       backgroundColor: "transparent",
@@ -57,10 +54,12 @@ export const FolderSection = () => {
                         <div className="h-[10px] w-[10px] bg-[#0022FF] rounded-full mt-[10px] mr-2" />
                       )}
                       <div>
-                        <div className="text-lg font-semibold">{tab.label}</div>
-                        {/* <div className="text-sm text-gray-500">
-                          {tab.categories}
-                        </div> */}
+                        <div className="text-[16px] font-semibold">
+                          {tab.label}
+                        </div>
+                        <div className="text-[12px] text-gray-500">
+                          {tab.subtitle}
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -85,29 +84,31 @@ export const FolderSection = () => {
                 className="w-[95%] bg-white h-400 rounded-xl z-10"
               >
                 <div className="p-10 font-mono">
-                  <p className="text-xl font-bold">{selectedFolder.label}</p>
-                  {/* <p className="font-normal text-md text-gray-500"> */}
-                  {/* {selectedFolder.categories} */}
-                  {/* </p> */}
-                  <div className="flex flex-row w-full py-10">
-                    <Link href={`/projects/compere`} className="w-full">
-                      <div
-                        className="w-1/3 h-70 p-2 border border-gray-200 rounded-lg m-2 cursor-pointer hover:shadow-lg transition-shadow duration-200"
-                        onClick={() => {}}
-                      >
-                        <img
-                          src={"project.image"}
-                          alt={"project.name"}
-                          className="w-full h-2/3 rounded-lg"
-                        />
-                        <h2 className="text-lg font-semibold mt-2">
-                          {"project.name"}
-                        </h2>
-                        <p className="text-sm text-gray-600">
-                          {"project.description"}
-                        </p>
-                      </div>
-                    </Link>
+                  {/* <p className="text-xl font-bold">{selectedFolder.label}</p>
+                  <p className="font-normal text-md text-gray-500">
+                    {selectedFolder.subtitle}
+                  </p> */}
+                  <div>
+                    {(() => {
+                      switch (selectedFolder.id) {
+                        case "01":
+                          return <AboutSection />;
+                        case "02":
+                          return <ProjectSection />;
+                        case "03":
+                          return (
+                            <p className="mt-5 text-gray-700">
+                              I write articles on various topics related to
+                              technology, programming, and software development.
+                              Check out my latest writings here.
+                            </p>
+                          );
+                        case "04":
+                          return <ContactSection />;
+                        default:
+                          return null;
+                      }
+                    })()}
                   </div>
                 </div>
               </motion.div>

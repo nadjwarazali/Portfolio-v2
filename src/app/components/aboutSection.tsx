@@ -2,7 +2,7 @@ import React from "react";
 
 export const AboutSection = () => {
   return (
-    <div className="col-start-2 py-50">
+    <div className="col-start-2 py-10">
       <div className="flex flex-row items-center">
         <img src={"/assets/logo-temp.svg"} />
         <p className="text-2xl font-sans font-light pl-4 pt-2">

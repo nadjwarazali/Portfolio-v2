@@ -2,7 +2,7 @@ import React from "react";
 
 export const ContactSection = () => {
   return (
-    <div className="col-start-2 pt-20">
+    <div className="col-start-2 pt-10">
       <div className="flex flex-row gap-20">
         <div className="bg-white w-80 rounded-2xl border border-2 border-[#0022FF] shadow-xl p-5">
           <img

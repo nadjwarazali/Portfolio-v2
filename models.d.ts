@@ -2,6 +2,7 @@ interface Folder {
   id: string;
   label: string;
   titlePosition: number;
+  subtitle?: string;
 }
 
 interface Project {
