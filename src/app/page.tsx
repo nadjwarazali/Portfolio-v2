@@ -9,7 +9,7 @@ export default function Home() {
 
   return (
     <>
-      <Parallax ref={parallaxRef} pages={1.5}>
+      <Parallax ref={parallaxRef} pages={1.7}>
         <ParallaxLayer offset={0} speed={0.5}>
           <section className="grid md:grid-rows-[10px_1fr_10px] items-center justify-items-center min-h-screen pb-10">
             <div className="flex flex-col md:flex-row md:gap-[32px] md:row-start-2">
