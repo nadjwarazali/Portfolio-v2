@@ -2,29 +2,28 @@ export const projects: Project[] = [
   {
     id: "01",
     title: "Compere",
-    categories: ["Startup", "Branding", "Web App"],
+    categories: ["Startup", "Branding", "Web App", "React", "Pitch"],
     stack: ["Figma", "Illustrator"],
     description:
-      "A design project focused on creating a cohesive brand identity.",
+      "Event management platform that simplifies event planning and execution",
     imgSrc: "/assets/projects/compere/featured-compere.png",
-    link: "https://example.com/compere",
   },
   {
     id: "02",
     title: "AWSC",
-    categories: ["Design", "Identity", "Visual"],
+    categories: ["Mobile App", "Branding", "React Native", "Supabase"],
     stack: ["Figma", "Illustrator"],
     description:
-      "A design project focused on creating a cohesive brand identity.",
-    imgSrc: "https://unsplash.com/photos/JmuyB_LibRo",
+      "Sports App that connect players with matches nearby. Think Tinder for sports",
+    imgSrc: "/assets/projects/awsc/awsc-mascot.svg",
   },
   {
     id: "03",
     title: "Pawspital",
-    categories: ["Mobile App"],
+    categories: ["Mobile App", "Flutter", "Firebase"],
     stack: ["Figma", "Illustrator"],
     description:
-      "A design project focused on creating a cohesive brand identity.",
+      "Pet's health monitoring app. Track your pet's location, and nutrition",
     imgSrc: "/assets/projects/pawspital/featured.png",
   },
 ];
