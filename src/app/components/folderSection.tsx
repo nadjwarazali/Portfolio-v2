@@ -32,7 +32,7 @@ export const FolderSection = ({ scrollRef }: FolderSectionProp) => {
               <div
                 key={tab.id}
                 className="absolute"
-                style={{ top: isMobile ? `${i * 50}px` : `${i * 40}px` }}
+                style={{ top: isMobile ? `${i * 45}px` : `${i * 40}px` }}
               >
                 <motion.div
                   className="cursor-pointer relative z-10"

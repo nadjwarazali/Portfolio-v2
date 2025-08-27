@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Roboto, Roboto_Mono } from "next/font/google";
+import { Roboto, Roboto_Mono, Crimson_Text } from "next/font/google";
 import "./globals.css";
 
 const robotoSans = Roboto({
@@ -10,6 +10,12 @@ const robotoSans = Roboto({
 const robotoMono = Roboto_Mono({
   variable: "--font-roboto-mono",
   subsets: ["latin"],
+});
+
+const crimson = Crimson_Text({
+  subsets: ["latin"],
+  weight: ["400", "700"],
+  variable: "--font-crimson",
 });
 
 export const metadata: Metadata = {
@@ -29,7 +35,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${robotoSans.variable} ${robotoMono.variable} antialiased overflow-x-hidden`}
+        className={`${robotoSans.variable} ${robotoMono.variable} ${crimson.variable} antialiased overflow-x-hidden`}
       >
         {children}
       </body>

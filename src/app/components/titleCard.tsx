@@ -5,6 +5,7 @@ const AltCutoutSVG = ({ frameCount = 5, interval = 150 }) => {
   const [frame, setFrame] = useState(0);
   const [isVisible, setIsVisible] = useState(true);
   const ref = useRef(null);
+  const isMobile = window.innerWidth <= 768;
 
   // Animation loop
   useEffect(() => {
@@ -36,8 +37,8 @@ const AltCutoutSVG = ({ frameCount = 5, interval = 150 }) => {
         src={`/assets/altFrames/alt-${frame + 1}.svg`}
         alt={`ALT frame ${frame}`}
         style={{
-          width: "200px",
-          height: "180px",
+          width: isMobile ? "150px" : "180px",
+          height: isMobile ? "120px" : "180px",
           display: "block",
           margin: "0 auto",
         }}
