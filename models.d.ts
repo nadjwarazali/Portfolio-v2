@@ -1,7 +1,8 @@
 interface Folder {
   id: string;
   label: string;
-  titlePosition: number;
+  titlePositionDesktop: number;
+  titlePositionMobile: number;
   subtitle?: string;
 }
 

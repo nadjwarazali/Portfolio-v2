@@ -14,6 +14,7 @@ export const FolderSection = ({ scrollRef }: FolderSectionProp) => {
   const [selectedFolder, setSelectedFolder] = useState<Folder>(folderTabs[0]);
   const [hoverId, setHoverId] = useState<string | null>(null);
   const parallaxRef = scrollRef;
+  const isMobile = window.innerWidth <= 768;
 
   const handleSelect = (tab: Folder) => {
     parallaxRef.current.scrollTo(0.25);
@@ -31,7 +32,7 @@ export const FolderSection = ({ scrollRef }: FolderSectionProp) => {
               <div
                 key={tab.id}
                 className="absolute"
-                style={{ top: `${i * 40}px` }}
+                style={{ top: isMobile ? `${i * 50}px` : `${i * 40}px` }}
               >
                 <motion.div
                   className="cursor-pointer relative z-10"
@@ -43,27 +44,44 @@ export const FolderSection = ({ scrollRef }: FolderSectionProp) => {
                   }}
                   transition={{ type: "spring", stiffness: 300, damping: 20 }}
                 >
-                  <img
-                    src={`/assets/folder/folder-${i}.svg`}
-                    className="w-full object-contain"
-                    alt={`${tab.id}`}
-                  />
+                  <div className="relative">
+                    {/* Mobile image */}
+                    <div className="block md:hidden">
+                      <img
+                        src={`/assets/folder/folder-mobile-${i}.svg`}
+                        className=" object-fill"
+                        alt={`${tab.id}`}
+                      />
+                    </div>
+
+                    {/* Desktop image */}
+                    <div className="hidden md:block">
+                      <img
+                        src={`/assets/folder/folder-${i}.svg`}
+                        className="w-full object-contain"
+                        alt={`${tab.id}`}
+                      />
+                    </div>
+                  </div>
                   <div
-                    className={`absolute top-3 font-mono text-sm text-gray-800 items-center`}
+                    className={`absolute top-4 md:top-3 font-mono text-sm text-gray-800 items-center bg-transparent`}
                     style={{
-                      left: `${tab.titlePosition}%`,
-                      backgroundColor: "transparent",
+                      left: `${
+                        isMobile
+                          ? tab.titlePositionMobile
+                          : tab.titlePositionDesktop
+                      }%`,
                     }}
                   >
                     <div className="flex flex-row">
                       {isSelected && (
-                        <div className="h-[10px] w-[10px] bg-[#0022FF] rounded-full mt-[10px] mr-2" />
+                        <div className="h-[10px] w-[10px] bg-[#0022FF] rounded-full mt-[7px] md:mt-[10px] mr-2" />
                       )}
                       <div>
                         <div className="text-[16px] font-semibold">
                           {tab.label}
                         </div>
-                        <div className="text-[12px] text-gray-500">
+                        <div className="hidden md:block text-[12px] text-gray-500">
                           {tab.subtitle}
                         </div>
                       </div>
@@ -89,7 +107,7 @@ export const FolderSection = ({ scrollRef }: FolderSectionProp) => {
                 }}
                 className="w-full bg-white h-400  z-10"
               >
-                <div className="p-10 font-mono">
+                <div className="font-mono">
                   <div>
                     {(() => {
                       switch (selectedFolder.id) {
@@ -99,10 +117,11 @@ export const FolderSection = ({ scrollRef }: FolderSectionProp) => {
                           return <ProjectSection />;
                         case "03":
                           return (
-                            <p className="mt-5 text-gray-700">
-                              I write articles on various topics related to
+                            <p className="mt-5 text-gray-700 p-10 ">
+                              No article yet. Stay tuned!
+                              {/* I write articles on various topics related to
                               technology, programming, and software development.
-                              Check out my latest writings here.
+                              Check out my latest writings here. */}
                             </p>
                           );
                         case "04":

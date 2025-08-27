@@ -2,7 +2,7 @@ export const projects: Project[] = [
   {
     id: "01",
     title: "Compere",
-    categories: ["Startup", "Branding", "Web Application"],
+    categories: ["Startup", "Branding", "Web App"],
     stack: ["Figma", "Illustrator"],
     description:
       "A design project focused on creating a cohesive brand identity.",
@@ -21,7 +21,7 @@ export const projects: Project[] = [
   {
     id: "03",
     title: "Pawspital",
-    categories: ["Design", "Identity", "Visual"],
+    categories: ["Mobile App"],
     stack: ["Figma", "Illustrator"],
     description:
       "A design project focused on creating a cohesive brand identity.",
