@@ -1,15 +1,15 @@
-import React from "react";
-import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { folderTabs } from "../data/folders";
 import AboutSection from "./aboutSection";
 import ConnectSection from "./connectSection";
 import ProjectSection from "./projectSection";
 
 type FolderSectionProp = {
-  scrollRef: React.RefObject<any>;
+  scrollRef: React.RefObject<{
+    scrollTo: (value: number) => void;
+  } | null>;
 };
-
 export const FolderSection = ({ scrollRef }: FolderSectionProp) => {
   const [selectedFolder, setSelectedFolder] = useState<Folder>(folderTabs[0]);
   const [hoverId, setHoverId] = useState<string | null>(null);
@@ -17,7 +17,7 @@ export const FolderSection = ({ scrollRef }: FolderSectionProp) => {
   const isMobile = window.innerWidth <= 768;
 
   const handleSelect = (tab: Folder) => {
-    parallaxRef.current.scrollTo(0.25);
+    parallaxRef.current?.scrollTo(0.25);
 
     setSelectedFolder(tab);
   };

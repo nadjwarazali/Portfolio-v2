@@ -5,7 +5,7 @@ import { Parallax, ParallaxLayer } from "@react-spring/parallax";
 import { FolderSection } from "./components/folderSection";
 
 export default function Home() {
-  const parallaxRef = useRef<any>(null);
+  const parallaxRef = useRef(null);
 
   return (
     <>

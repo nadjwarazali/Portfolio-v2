@@ -1,15 +1,16 @@
 "use client";
 import { motion } from "framer-motion";
-import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 type NavbarProps = {
-  scrollRef: React.RefObject<any>;
+  scrollRef: React.RefObject<{
+    scrollTo: (value: number) => void;
+  } | null>;
 };
 export default function Navbar({ scrollRef }: NavbarProps) {
   const parallaxRef = scrollRef;
 
-  const [showNavbar, setShowNavbar] = useState(true);
+  const [showNavbar] = useState(true);
 
   return (
     <motion.nav
@@ -24,25 +25,25 @@ export default function Navbar({ scrollRef }: NavbarProps) {
         <div className="flex justify-between items-center h-10 ">
           <button
             className="cursor-pointer"
-            onClick={() => parallaxRef.current.scrollTo(0)}
+            onClick={() => parallaxRef.current?.scrollTo(0)}
           >
             <img src="/assets/logo-temp.svg"></img>
           </button>
           <div className="hidden md:flex space-x-14">
             <button
-              onClick={() => parallaxRef.current.scrollTo(0.25)}
+              onClick={() => parallaxRef.current?.scrollTo(0.25)}
               className="cursor-pointer font-mono text-md hover:text-[#0022FF]"
             >
               PROJECTS
             </button>
             <button
-              onClick={() => parallaxRef.current.scrollTo(1.2)}
+              onClick={() => parallaxRef.current?.scrollTo(1.2)}
               className="cursor-pointer font-mono text-md hover:text-[#0022FF]"
             >
               ABOUT
             </button>
             <button
-              onClick={() => parallaxRef.current.scrollTo(2)}
+              onClick={() => parallaxRef.current?.scrollTo(2)}
               className="cursor-pointer font-mono text-md hover:text-[#0022FF]"
             >
               CONTACT
