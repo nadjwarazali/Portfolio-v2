@@ -43,6 +43,8 @@ const AltCutoutSVG = ({ frameCount = 5, interval = 150 }) => {
           display: "block",
           margin: "0 auto",
         }}
+        width={100}
+        height={100}
       />
     </div>
   );

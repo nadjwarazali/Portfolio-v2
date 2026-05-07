@@ -28,7 +28,12 @@ export default function Navbar({ scrollRef }: NavbarProps) {
             className="cursor-pointer"
             onClick={() => parallaxRef.current?.scrollTo(0)}
           >
-            <Image src="/assets/logo-temp.svg" alt="ALT Logo" />
+            <Image
+              src="/assets/logo-temp.svg"
+              alt="ALT Logo"
+              width={100}
+              height={100}
+            />
           </button>
           <div className="hidden md:flex space-x-14">
             <button

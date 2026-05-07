@@ -8,6 +8,8 @@ export default function ConnectSection() {
         <Image
           src="./assets/profile.png"
           className="border border-2 border-[#0022FF] w-full rounded-2xl"
+          width={100}
+          height={100}
           alt="Profile Image"
         />
         <div className="flex flex-col px-2 pt-6 font-mono ">
@@ -23,6 +25,8 @@ export default function ConnectSection() {
                   "_blank",
                 )
               }
+              width={100}
+              height={100}
               alt="LinkedIn"
             />
             <Image
@@ -31,6 +35,8 @@ export default function ConnectSection() {
               onClick={() =>
                 window.open("https://www.behance.net/nadjwarazali", "_blank")
               }
+              width={100}
+              height={100}
               alt="Behance"
             />
             <Image
@@ -39,6 +45,8 @@ export default function ConnectSection() {
               onClick={() =>
                 window.open("https://github.com/nadjwarazali", "_blank")
               }
+              width={100}
+              height={100}
               alt="Github"
             />
           </div>

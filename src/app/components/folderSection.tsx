@@ -51,6 +51,8 @@ export const FolderSection = ({ scrollRef }: FolderSectionProp) => {
                       <Image
                         src={`/assets/folder/folder-mobile-${i}.svg`}
                         className=" object-fill"
+                        width={100}
+                        height={100}
                         alt={`${tab.id}`}
                       />
                     </div>
@@ -60,6 +62,8 @@ export const FolderSection = ({ scrollRef }: FolderSectionProp) => {
                       <Image
                         src={`/assets/folder/folder-${i}.svg`}
                         className="w-full object-contain"
+                        width={100}
+                        height={100}
                         alt={`${tab.id}`}
                       />
                     </div>

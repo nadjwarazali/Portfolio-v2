@@ -22,6 +22,8 @@ export default function ProjectSection() {
               <Image
                 src={`${project.imgSrc}`}
                 alt={project.title}
+                width={100}
+                height={100}
                 className="w-full h-[300px] rounded-lg border-1 border-gray-100 object-cover"
               />
               <div className="h-1/3 p-3 mt-2">
