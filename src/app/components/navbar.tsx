@@ -1,6 +1,7 @@
 "use client";
 import { motion } from "framer-motion";
 import { useState } from "react";
+import Image from "next/image";
 
 type NavbarProps = {
   scrollRef: React.RefObject<{
@@ -27,7 +28,7 @@ export default function Navbar({ scrollRef }: NavbarProps) {
             className="cursor-pointer"
             onClick={() => parallaxRef.current?.scrollTo(0)}
           >
-            <img src="/assets/logo-temp.svg"></img>
+            <Image src="/assets/logo-temp.svg" alt="ALT Logo" />
           </button>
           <div className="hidden md:flex space-x-14">
             <button

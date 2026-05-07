@@ -1,29 +1,31 @@
 import React from "react";
+import Image from "next/image";
 
 export default function ConnectSection() {
   return (
     <div className="flex flex-col md:flex-row gap-20 justify-center p-10 ">
       <div className="bg-white w-80 rounded-2xl border border-2 border-[#0022FF] shadow-xl p-5">
-        <img
+        <Image
           src="./assets/profile.png"
           className="border border-2 border-[#0022FF] w-full rounded-2xl"
-        ></img>
+          alt="Profile Image"
+        />
         <div className="flex flex-col px-2 pt-6 font-mono ">
           <p className="text-2xl font-semibold ">Nadjwa Razali</p>
           <p className="text-sm text-gray-800 pb-8">@nadjwarazali</p>
           <div className="flex flex-row gap-2">
-            <img
+            <Image
               src={"./assets/icons/TablerBrandLinkedin.svg"}
               className="h-6 w-fit cursor-pointer"
               onClick={() =>
                 window.open(
                   "https://www.linkedin.com/in/nadjwarazali/",
-                  "_blank"
+                  "_blank",
                 )
               }
               alt="LinkedIn"
             />
-            <img
+            <Image
               src={"./assets/icons/TablerBrandBehance.svg"}
               className="h-6 w-fit cursor-pointer"
               onClick={() =>
@@ -31,7 +33,7 @@ export default function ConnectSection() {
               }
               alt="Behance"
             />
-            <img
+            <Image
               src={"./assets/icons/TablerBrandGithub.svg"}
               className="h-6 w-fit cursor-pointer"
               onClick={() =>

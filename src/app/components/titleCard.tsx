@@ -1,5 +1,6 @@
 "use client";
 import React, { useEffect, useState, useRef } from "react";
+import Image from "next/image";
 
 const AltCutoutSVG = ({ frameCount = 5, interval = 150 }) => {
   const [frame, setFrame] = useState(0);
@@ -24,7 +25,7 @@ const AltCutoutSVG = ({ frameCount = 5, interval = 150 }) => {
       ([entry]) => {
         setIsVisible(entry.isIntersecting);
       },
-      { threshold: 0.1 }
+      { threshold: 0.1 },
     );
 
     if (ref.current) observer.observe(ref.current);
@@ -33,7 +34,7 @@ const AltCutoutSVG = ({ frameCount = 5, interval = 150 }) => {
 
   return (
     <div ref={ref}>
-      <img
+      <Image
         src={`/assets/altFrames/alt-${frame + 1}.svg`}
         alt={`ALT frame ${frame}`}
         style={{

@@ -1,5 +1,6 @@
 import React from "react";
 import { projects } from "../data/projects";
+import Image from "next/image";
 
 export default function ProjectSection() {
   return (
@@ -18,8 +19,9 @@ export default function ProjectSection() {
               className="h-full w-[320px] md:w-full ml-2 p-5 border border-2 border-gray-200 rounded-lg cursor-pointer hover:shadow-lg transition-shadow duration-200 flex-shrink-0 md:flex-shrink"
               onClick={() => {}}
             >
-              <img
+              <Image
                 src={`${project.imgSrc}`}
+                alt={project.title}
                 className="w-full h-[300px] rounded-lg border-1 border-gray-100 object-cover"
               />
               <div className="h-1/3 p-3 mt-2">

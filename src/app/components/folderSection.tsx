@@ -4,6 +4,7 @@ import { folderTabs } from "../data/folders";
 import AboutSection from "./aboutSection";
 import ConnectSection from "./connectSection";
 import ProjectSection from "./projectSection";
+import Image from "next/image";
 
 type FolderSectionProp = {
   scrollRef: React.RefObject<{
@@ -47,7 +48,7 @@ export const FolderSection = ({ scrollRef }: FolderSectionProp) => {
                   <div className="relative">
                     {/* Mobile image */}
                     <div className="block md:hidden">
-                      <img
+                      <Image
                         src={`/assets/folder/folder-mobile-${i}.svg`}
                         className=" object-fill"
                         alt={`${tab.id}`}
@@ -56,7 +57,7 @@ export const FolderSection = ({ scrollRef }: FolderSectionProp) => {
 
                     {/* Desktop image */}
                     <div className="hidden md:block">
-                      <img
+                      <Image
                         src={`/assets/folder/folder-${i}.svg`}
                         className="w-full object-contain"
                         alt={`${tab.id}`}
