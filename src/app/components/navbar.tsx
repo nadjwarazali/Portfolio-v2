@@ -29,7 +29,7 @@ export default function Navbar({ scrollRef }: NavbarProps) {
             onClick={() => parallaxRef.current?.scrollTo(0)}
           >
             <Image
-              src="/assets/logo-temp.svg"
+              src={`${process.env.NEXT_PUBLIC_BASE_PATH}/assets/logo-temp.svg`}
               alt="ALT Logo"
               width={100}
               height={100}
