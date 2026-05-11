@@ -1,6 +1,7 @@
 "use client";
 import React, { useEffect, useState, useRef } from "react";
 import Image from "next/image";
+import { assetPath } from "../lib/assetPath";
 
 const AltCutoutSVG = ({ frameCount = 5, interval = 150 }) => {
   const [frame, setFrame] = useState(0);
@@ -35,7 +36,7 @@ const AltCutoutSVG = ({ frameCount = 5, interval = 150 }) => {
   return (
     <div ref={ref}>
       <Image
-        src={`${process.env.NEXT_PUBLIC_BASE_PATH}/assets/altFrames/alt-${frame + 1}.svg`}
+        src={assetPath(`/assets/altFrames/alt-${frame + 1}.svg`)}
         alt={`ALT frame ${frame}`}
         style={{
           width: isMobile ? "150px" : "180px",

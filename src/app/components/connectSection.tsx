@@ -1,12 +1,13 @@
 import React from "react";
 import Image from "next/image";
+import { assetPath } from "../lib/assetPath";
 
 export default function ConnectSection() {
   return (
     <div className="flex flex-col md:flex-row gap-20 justify-center p-10 ">
       <div className="bg-white w-80 rounded-2xl border border-2 border-[#0022FF] shadow-xl p-5">
         <Image
-          src={`${process.env.NEXT_PUBLIC_BASE_PATH}/assets/profile.png`}
+          src={assetPath(`/assets/profile.png`)}
           className="border border-2 border-[#0022FF] w-full rounded-2xl"
           width={100}
           height={100}
@@ -17,7 +18,7 @@ export default function ConnectSection() {
           <p className="text-sm text-gray-800 pb-8">@nadjwarazali</p>
           <div className="flex flex-row gap-2">
             <Image
-              src={`${process.env.NEXT_PUBLIC_BASE_PATH}/assets/icons/TablerBrandLinkedin.svg`}
+              src={assetPath(`/assets/icons/TablerBrandLinkedin.svg`)}
               className="h-6 w-fit cursor-pointer"
               onClick={() =>
                 window.open(
@@ -30,7 +31,7 @@ export default function ConnectSection() {
               alt="LinkedIn"
             />
             <Image
-              src={`${process.env.NEXT_PUBLIC_BASE_PATH}/assets/icons/TablerBrandBehance.svg`}
+              src={assetPath(`/assets/icons/TablerBrandBehance.svg`)}
               className="h-6 w-fit cursor-pointer"
               onClick={() =>
                 window.open("https://www.behance.net/nadjwarazali", "_blank")
@@ -40,7 +41,7 @@ export default function ConnectSection() {
               alt="Behance"
             />
             <Image
-              src={`${process.env.NEXT_PUBLIC_BASE_PATH}/assets/icons/TablerBrandGithub.svg`}
+              src={assetPath(`/assets/icons/TablerBrandGithub.svg`)}
               className="h-6 w-fit cursor-pointer"
               onClick={() =>
                 window.open("https://github.com/nadjwarazali", "_blank")

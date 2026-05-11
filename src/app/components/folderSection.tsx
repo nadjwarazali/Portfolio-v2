@@ -5,6 +5,7 @@ import AboutSection from "./aboutSection";
 import ConnectSection from "./connectSection";
 import ProjectSection from "./projectSection";
 import Image from "next/image";
+import { assetPath } from "../lib/assetPath";
 
 type FolderSectionProp = {
   scrollRef: React.RefObject<{
@@ -49,7 +50,7 @@ export const FolderSection = ({ scrollRef }: FolderSectionProp) => {
                     {/* Mobile image */}
                     <div className="block md:hidden">
                       <Image
-                        src={`${process.env.NEXT_PUBLIC_BASE_PATH}/assets/folder/folder-mobile-${i}.svg`}
+                        src={assetPath(`/assets/folder/folder-mobile-${i}.svg`)}
                         className=" object-fill"
                         width={100}
                         height={100}
@@ -60,7 +61,7 @@ export const FolderSection = ({ scrollRef }: FolderSectionProp) => {
                     {/* Desktop image */}
                     <div className="hidden md:block">
                       <Image
-                        src={`${process.env.NEXT_PUBLIC_BASE_PATH}/assets/folder/folder-${i}.svg`}
+                        src={assetPath(`/assets/folder/folder-${i}.svg`)}
                         className="w-full object-contain"
                         width={100}
                         height={100}

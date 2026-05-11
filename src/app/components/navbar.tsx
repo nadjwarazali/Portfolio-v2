@@ -2,6 +2,7 @@
 import { motion } from "framer-motion";
 import { useState } from "react";
 import Image from "next/image";
+import { assetPath } from "../lib/assetPath";
 
 type NavbarProps = {
   scrollRef: React.RefObject<{
@@ -29,7 +30,7 @@ export default function Navbar({ scrollRef }: NavbarProps) {
             onClick={() => parallaxRef.current?.scrollTo(0)}
           >
             <Image
-              src={`${process.env.NEXT_PUBLIC_BASE_PATH}/assets/logo-temp.svg`}
+              src={assetPath(`/assets/logo-temp.svg`)}
               alt="ALT Logo"
               width={100}
               height={100}
