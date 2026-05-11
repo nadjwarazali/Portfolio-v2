@@ -6,7 +6,7 @@ export default function AboutSection() {
     <div className="col-start-2 py-20 md:px-40 p-10">
       <div className="flex flex-row items-center">
         <Image
-          src={"/assets/logo-temp.svg"}
+          src={`${process.env.NEXT_PUBLIC_BASE_PATH}/assets/logo-temp.svg`}
           alt="ALT Logo"
           width={100}
           height={100}

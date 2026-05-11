@@ -35,7 +35,7 @@ const AltCutoutSVG = ({ frameCount = 5, interval = 150 }) => {
   return (
     <div ref={ref}>
       <Image
-        src={`/assets/altFrames/alt-${frame + 1}.svg`}
+        src={`${process.env.NEXT_PUBLIC_BASE_PATH}/assets/altFrames/alt-${frame + 1}.svg`}
         alt={`ALT frame ${frame}`}
         style={{
           width: isMobile ? "150px" : "180px",
