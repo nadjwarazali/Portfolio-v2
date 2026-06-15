@@ -1,5 +1,6 @@
 "use client";
 import AltCutoutAnimation from "./components/titleCard";
+import GradientBackground from "./components/gradientBg";
 import { useRef } from "react";
 import { Parallax, ParallaxLayer } from "@react-spring/parallax";
 import { FolderSection } from "./components/folderSection";
@@ -9,7 +10,8 @@ export default function Home() {
 
   return (
     <>
-      <Parallax ref={parallaxRef} pages={1.7}>
+      <GradientBackground />
+      <Parallax ref={parallaxRef} pages={1.5}>
         <ParallaxLayer offset={0} speed={0.5}>
           <section className="grid md:grid-rows-[10px_1fr_10px] items-center justify-items-center min-h-screen pb-10">
             <div className="flex flex-col md:flex-row md:gap-[32px] md:row-start-2">
@@ -20,7 +22,7 @@ export default function Home() {
             </div>
           </section>
         </ParallaxLayer>
-        <ParallaxLayer offset={0.7} speed={1.9} style={{ zIndex: 10 }}>
+        <ParallaxLayer offset={0.65} speed={0.3} style={{ zIndex: 10 }}>
           <section id="projects">
             <FolderSection scrollRef={parallaxRef} />
           </section>

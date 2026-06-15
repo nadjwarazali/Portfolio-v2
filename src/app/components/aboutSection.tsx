@@ -13,18 +13,16 @@ export default function AboutSection() {
           height={100}
         />
         <p className="text-md md:text-xl md:text-2xl font-sans font-light pl-4 pt-2">
-          is an archive of the many projects that were created — from code to
-          canvas.
+          is a one-person creative studio based in Kuala Lumpur.
         </p>
       </div>
-      <p className="text-md md:text-xl md:text-2xl  font-sans font-light pt-2">
-        Built as both a personal portfolio and a creative timeline, this site
-        serves as a home for the work done — as a frontend developer, a
-        designer, and an independent creator.
+      <p className="text-md md:text-xl md:text-2xl font-sans font-light pt-2">
+        We build interactive web experiences — designed with intention and built
+        with care. Work that lives at the intersection of design and engineering.
       </p>
 
-      <p className="text-md md:text-xl md:text-2xl  font-sans font-light pt-20">
-        behind the pursuit, created by
+      <p className="text-md md:text-xl md:text-2xl font-sans font-light pt-20">
+        founded and run by
         <span className="font-normal pl-2">Nadjwa Razali</span>
       </p>
     </div>
