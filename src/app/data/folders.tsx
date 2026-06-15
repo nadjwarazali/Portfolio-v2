@@ -16,16 +16,9 @@ export const folderTabs: Folder[] = [
   },
   {
     id: "03",
-    label: "Articles",
+    label: "Experiments",
     titlePositionDesktop: 64,
     titlePositionMobile: 18,
-    subtitle: "Notes & Reflections",
-  },
-  {
-    id: "04",
-    label: "Connect",
-    titlePositionDesktop: 35,
-    titlePositionMobile: 55,
-    subtitle: "Get in touch",
+    subtitle: "Side explorations",
   },
 ];

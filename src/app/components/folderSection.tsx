@@ -1,8 +1,7 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence, LayoutGroup } from "framer-motion";
 import { folderTabs } from "../data/folders";
 import AboutSection from "./aboutSection";
-import ConnectSection from "./connectSection";
 import ProjectSection from "./projectSection";
 
 // Each shape is a horizontal line running the full width of the viewBox,
@@ -73,15 +72,25 @@ type FolderSectionProp = {
     scrollTo: (value: number) => void;
     container?: React.RefObject<HTMLElement | null>;
   } | null>;
+  isExpanded: boolean;
+  setIsExpanded: (v: boolean) => void;
+  isAboutExpanded: boolean;
+  setIsAboutExpanded: (v: boolean) => void;
 };
-export const FolderSection = ({ scrollRef }: FolderSectionProp) => {
+export const FolderSection = ({
+  scrollRef,
+  isExpanded,
+  setIsExpanded,
+  isAboutExpanded,
+  setIsAboutExpanded,
+}: FolderSectionProp) => {
   const [selectedFolder, setSelectedFolder] = useState<Folder>(folderTabs[0]);
   const [hoverId, setHoverId] = useState<string | null>(null);
-  const [isExpanded, setIsExpanded] = useState(false);
 
   useEffect(() => {
     const parallaxContainer = scrollRef.current?.container?.current;
-    if (isExpanded) {
+    const shouldLock = isExpanded || isAboutExpanded;
+    if (shouldLock) {
       document.body.style.overflow = "hidden";
       document.documentElement.style.overflow = "hidden";
       if (parallaxContainer) {
@@ -101,26 +110,40 @@ export const FolderSection = ({ scrollRef }: FolderSectionProp) => {
         parallaxContainer.style.overflowY = "scroll";
       }
     };
-  }, [isExpanded, scrollRef]);
+  }, [isExpanded, isAboutExpanded, scrollRef]);
 
   const parallaxRef = scrollRef;
   const isMobile = window.innerWidth <= 768;
+
+  const tabsRef = useRef<HTMLDivElement>(null);
+  const [tabsVisible, setTabsVisible] = useState(true);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => setTabsVisible(entry.isIntersecting),
+      { threshold: 0.1 },
+    );
+    if (tabsRef.current) observer.observe(tabsRef.current);
+    return () => observer.disconnect();
+  }, []);
 
   const handleSelect = (tab: Folder) => {
     parallaxRef.current?.scrollTo(1);
 
     setSelectedFolder(tab);
+    setIsAboutExpanded(false);
+    setIsExpanded(false);
   };
   return (
     <LayoutGroup>
       <div className="bg-transparent" style={{ minHeight: "100vh" }}>
-        <div className="relative">
+        <div className="relative" ref={tabsRef}>
           <div
             className="relative"
             style={{
               paddingBottom: isMobile
-                ? `calc(${3 * 45}px + 16.2791%)`
-                : `calc(${3 * 40}px + 4.5045%)`,
+                ? `calc(${2 * 60}px + 16.2791%)`
+                : `calc(${2 * 55}px + 4.5045%)`,
             }}
           >
             {folderTabs.map((tab, i) => {
@@ -130,7 +153,7 @@ export const FolderSection = ({ scrollRef }: FolderSectionProp) => {
                 <div
                   key={tab.id}
                   className="absolute left-0 right-0 "
-                  style={{ top: isMobile ? `${i * 45}px` : `${i * 40}px` }}
+                  style={{ top: isMobile ? `${i * 60}px` : `${i * 55}px` }}
                 >
                   <motion.div
                     className="cursor-pointer relative z-10"
@@ -138,7 +161,8 @@ export const FolderSection = ({ scrollRef }: FolderSectionProp) => {
                     onHoverEnd={() => setHoverId(null)}
                     onClick={handleSelect.bind(null, tab)}
                     animate={{
-                      y: isHover ? -10 : 30,
+                      y: isHover ? -16 : isSelected ? -6 : 30,
+                      scale: isSelected ? 1.02 : 1,
                     }}
                     transition={{ type: "spring", stiffness: 300, damping: 20 }}
                   >
@@ -208,38 +232,8 @@ export const FolderSection = ({ scrollRef }: FolderSectionProp) => {
           </div>
         </div>
         <AnimatePresence mode="wait">
-          {isExpanded && selectedFolder.id === "02" ? (
-            <motion.div
-              key="project-expanded"
-              initial={{ opacity: 0, scale: 0.98 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.98 }}
-              transition={{ duration: 0.25, ease: "easeOut" }}
-              style={{
-                position: "fixed",
-                top: 0,
-                left: 0,
-                right: 0,
-                bottom: 0,
-                zIndex: 50,
-                background: "#f3ecdc",
-                overflowY: "auto",
-                margin: 0,
-                padding: 0,
-              }}
-            >
-              <button
-                onClick={() => setIsExpanded(false)}
-                style={{ position: "fixed", top: 24, right: 24, zIndex: 51 }}
-                className="font-mono text-sm border border-[#1A1A1A] text-[#8B0000] px-4 py-2 rounded-full"
-              >
-                ✕ Close
-              </button>
-              <ProjectSection onExpand={() => {}} isExpanded={true} />
-            </motion.div>
-          ) : (
-            selectedFolder && (
-              <div className="flex justify-center w-full bg-[#f3ecdc] z-20">
+          {selectedFolder && (
+            <div className="flex justify-center w-full bg-[#f3ecdc] z-20">
                 <motion.div
                   key={selectedFolder.id}
                   initial={{ y: 100, opacity: 0 }}
@@ -258,7 +252,11 @@ export const FolderSection = ({ scrollRef }: FolderSectionProp) => {
                       {(() => {
                         switch (selectedFolder.id) {
                           case "01":
-                            return <AboutSection />;
+                            return (
+                              <AboutSection
+                                onExpand={() => setIsAboutExpanded(true)}
+                              />
+                            );
                           case "02":
                             return (
                               <ProjectSection
@@ -268,11 +266,9 @@ export const FolderSection = ({ scrollRef }: FolderSectionProp) => {
                           case "03":
                             return (
                               <p className="mt-5 text-gray-700 p-10 ">
-                                No article yet. Stay tuned!
+                                Nothing here yet. Stay tuned!
                               </p>
                             );
-                          case "04":
-                            return <ConnectSection />;
                           default:
                             return null;
                         }
@@ -281,10 +277,54 @@ export const FolderSection = ({ scrollRef }: FolderSectionProp) => {
                   </div>
                 </motion.div>
               </div>
-            )
           )}
         </AnimatePresence>
       </div>
+      <AnimatePresence>
+        {!tabsVisible && !isExpanded && !isAboutExpanded && (
+          <motion.div
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: -20 }}
+            transition={{ duration: 0.2 }}
+            className="hidden md:flex"
+            style={{
+              position: "fixed",
+              left: 24,
+              top: "50%",
+              transform: "translateY(-50%)",
+              zIndex: 100,
+              flexDirection: "column",
+              gap: "12px",
+            }}
+          >
+            {folderTabs.map((tab) => (
+              <button
+                key={tab.id}
+                onClick={() => handleSelect(tab)}
+                style={{
+                  fontFamily: "monospace",
+                  fontSize: "11px",
+                  color: selectedFolder.id === tab.id ? "#8B0000" : "#6B6560",
+                  background: "none",
+                  border: "none",
+                  cursor: "pointer",
+                  textAlign: "left",
+                  padding: "4px 0",
+                  borderLeft:
+                    selectedFolder.id === tab.id
+                      ? "2px solid #8B0000"
+                      : "2px solid transparent",
+                  paddingLeft: "8px",
+                  transition: "all 0.15s ease",
+                }}
+              >
+                {tab.label}
+              </button>
+            ))}
+          </motion.div>
+        )}
+      </AnimatePresence>
     </LayoutGroup>
   );
 };

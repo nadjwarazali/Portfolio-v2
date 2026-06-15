@@ -19,11 +19,26 @@ const crimson = Crimson_Text({
 });
 
 export const metadata: Metadata = {
-  title: "alt arkib",
-  description: "Portfolio of Alt Arkib by Nadjwa Razali",
+  title: "Nadjwa Razali — Creative Developer",
+  description:
+    "Creative Developer and founder of alt-arkib. Building interactive web experiences at the intersection of design and engineering. Based in Kuala Lumpur.",
   icons: {
     icon: "/assets/logo.svg",
     shortcut: "/assets/logo.svg",
+  },
+  openGraph: {
+    title: "Nadjwa Razali — Creative Developer",
+    description:
+      "Building interactive web experiences at the intersection of design and engineering.",
+    url: "https://nadjwarazali.my",
+    siteName: "Nadjwa Razali",
+    locale: "en_MY",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Nadjwa Razali — Creative Developer",
+    description:
+      "Building interactive web experiences at the intersection of design and engineering.",
   },
 };
 
