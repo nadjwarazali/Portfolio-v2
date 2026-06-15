@@ -33,7 +33,7 @@ export default function ProjectSection({
           return (
             <div
               key={i}
-              className="h-full w-[320px] md:w-full ml-2 p-5 border border-2 border-gray-200 rounded-lg cursor-pointer hover:shadow-lg transition-shadow duration-200 flex-shrink-0 md:flex-shrink"
+              className="h-full w-[320px] md:w-full ml-2 p-5 border border-2 border-[#1A1A1A]/20 rounded-lg cursor-pointer hover:shadow-lg transition-shadow duration-200 flex-shrink-0 md:flex-shrink bg-[#f3ecdc]"
               onClick={() => {}}
             >
               {/* <Image
@@ -50,7 +50,7 @@ export default function ProjectSection({
                   {project.categories.map((category, idx) => (
                     <span
                       key={idx}
-                      className="text-xs bg-gray-200 text-gray-800 rounded-full px-3 py-1"
+                      className="text-xs bg-[#1A1A1A]/10 text-[#1A1A1A] rounded-full px-3 py-1"
                     >
                       {category}
                     </span>
@@ -65,7 +65,7 @@ export default function ProjectSection({
         <div className="flex justify-start ml-2 px-10">
           <button
             onClick={onExpand}
-            className="font-mono text-sm border-b border-[#0022FF] text-[#0022FF] mt-6 hover:opacity-60 transition-opacity"
+            className="font-mono text-sm border-b border-[#8B0000] text-[#8B0000] mt-6 hover:opacity-60 transition-opacity"
           >
             See all projects →
           </button>

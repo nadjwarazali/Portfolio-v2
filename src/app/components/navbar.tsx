@@ -39,19 +39,19 @@ export default function Navbar({ scrollRef }: NavbarProps) {
           <div className="hidden md:flex space-x-14">
             <button
               onClick={() => parallaxRef.current?.scrollTo(0.25)}
-              className="cursor-pointer font-mono text-md hover:text-[#0022FF]"
+              className="cursor-pointer font-mono text-md hover:text-[#8B0000]"
             >
               PROJECTS
             </button>
             <button
               onClick={() => parallaxRef.current?.scrollTo(1.2)}
-              className="cursor-pointer font-mono text-md hover:text-[#0022FF]"
+              className="cursor-pointer font-mono text-md hover:text-[#8B0000]"
             >
               ABOUT
             </button>
             <button
               onClick={() => parallaxRef.current?.scrollTo(2)}
-              className="cursor-pointer font-mono text-md hover:text-[#0022FF]"
+              className="cursor-pointer font-mono text-md hover:text-[#8B0000]"
             >
               CONTACT
             </button>

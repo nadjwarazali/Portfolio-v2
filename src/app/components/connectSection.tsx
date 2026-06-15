@@ -5,10 +5,10 @@ import { assetPath } from "../lib/assetPath";
 export default function ConnectSection() {
   return (
     <div className="flex flex-col md:flex-row gap-20 justify-center p-10">
-      <div className="bg-white w-52 rounded-2xl border border-2 border-[#0022FF] shadow-xl p-4">
+      <div className="bg-[#f3ecdc] w-52 rounded-2xl border border-2 border-[#1A1A1A] shadow-xl p-4">
         <Image
           src={assetPath(`/assets/profile.png`)}
-          className="border border-2 border-[#0022FF] w-full rounded-2xl"
+          className="border border-2 border-[#1A1A1A] w-full rounded-2xl"
           width={100}
           height={100}
           alt="Profile Image"
@@ -65,8 +65,8 @@ export default function ConnectSection() {
         </p>
         <a href="mailto:nadjwarazali@gmail.com">
           <button className="group flex flex-row cursor-pointer md:py-5 items-center">
-            <div className="border border-1 w-7 h-0 mr-3 group-hover:border-[#0022FF] transition-colors duration-200"></div>
-            <p className="font-mono text-lg md:text-xl font-bold group-hover:text-[#0022FF] transition-colors duration-200">
+            <div className="border border-1 w-7 h-0 mr-3 group-hover:border-[#8B0000] transition-colors duration-200"></div>
+            <p className="font-mono text-lg md:text-xl font-bold group-hover:text-[#8B0000] transition-colors duration-200">
               Let's talk
             </p>
           </button>

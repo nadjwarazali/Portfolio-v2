@@ -28,11 +28,11 @@ export default function GradientBackground() {
           position: "fixed",
           inset: 0,
           zIndex: -1,
-          background: "#f0f1f5",
+          background: "#f3ecdc",
           overflow: "hidden",
         }}
       >
-        {/* Blob 1 — deep blue */}
+        {/* Blob 1 — dark red */}
         <div
           className="blob1"
           style={{
@@ -42,12 +42,12 @@ export default function GradientBackground() {
             width: "60vw",
             height: "60vw",
             borderRadius: "50%",
-            background: "radial-gradient(circle, rgba(0,34,255,0.18) 0%, transparent 70%)",
+            background: "radial-gradient(circle, rgba(139,0,0,0.14) 0%, transparent 70%)",
             filter: "blur(60px)",
           }}
         />
 
-        {/* Blob 2 — indigo */}
+        {/* Blob 2 — ink */}
         <div
           className="blob2"
           style={{
@@ -57,12 +57,12 @@ export default function GradientBackground() {
             width: "50vw",
             height: "50vw",
             borderRadius: "50%",
-            background: "radial-gradient(circle, rgba(60,20,200,0.14) 0%, transparent 70%)",
+            background: "radial-gradient(circle, rgba(26,26,26,0.08) 0%, transparent 70%)",
             filter: "blur(80px)",
           }}
         />
 
-        {/* Blob 3 — soft blue accent */}
+        {/* Blob 3 — warm sepia accent */}
         <div
           className="blob3"
           style={{
@@ -72,7 +72,7 @@ export default function GradientBackground() {
             width: "45vw",
             height: "45vw",
             borderRadius: "50%",
-            background: "radial-gradient(circle, rgba(0,80,255,0.12) 0%, transparent 70%)",
+            background: "radial-gradient(circle, rgba(139,0,0,0.10) 0%, transparent 70%)",
             filter: "blur(70px)",
           }}
         />

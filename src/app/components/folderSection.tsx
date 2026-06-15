@@ -151,10 +151,10 @@ export const FolderSection = ({ scrollRef }: FolderSectionProp) => {
                         xmlns="http://www.w3.org/2000/svg"
                         aria-hidden="true"
                       >
-                        <path d={mobileShapes[i].fill} fill="white" />
+                        <path d={mobileShapes[i].fill} fill="#f3ecdc" />
                         <path
                           d={mobileShapes[i].stroke}
-                          stroke="#0022FF"
+                          stroke="#1A1A1A"
                           strokeWidth="2"
                           fill="none"
                         />
@@ -168,10 +168,10 @@ export const FolderSection = ({ scrollRef }: FolderSectionProp) => {
                         xmlns="http://www.w3.org/2000/svg"
                         aria-hidden="true"
                       >
-                        <path d={desktopShapes[i].fill} fill="white" />
+                        <path d={desktopShapes[i].fill} fill="#f3ecdc" />
                         <path
                           d={desktopShapes[i].stroke}
-                          stroke="#0022FF"
+                          stroke="#1A1A1A"
                           strokeWidth="2"
                           fill="none"
                         />
@@ -189,7 +189,7 @@ export const FolderSection = ({ scrollRef }: FolderSectionProp) => {
                     >
                       <div className="flex flex-row">
                         {isSelected && (
-                          <div className="h-[10px] w-[10px] bg-[#0022FF] rounded-full mt-[7px] md:mt-[10px] mr-2" />
+                          <div className="h-[10px] w-[10px] bg-[#8B0000] rounded-full mt-[7px] md:mt-[10px] mr-2" />
                         )}
                         <div>
                           <div className="text-[16px] font-semibold">
@@ -222,7 +222,7 @@ export const FolderSection = ({ scrollRef }: FolderSectionProp) => {
                 right: 0,
                 bottom: 0,
                 zIndex: 50,
-                background: "white",
+                background: "#f3ecdc",
                 overflowY: "auto",
                 margin: 0,
                 padding: 0,
@@ -231,7 +231,7 @@ export const FolderSection = ({ scrollRef }: FolderSectionProp) => {
               <button
                 onClick={() => setIsExpanded(false)}
                 style={{ position: "fixed", top: 24, right: 24, zIndex: 51 }}
-                className="font-mono text-sm border border-[#0022FF] text-[#0022FF] px-4 py-2 rounded-full"
+                className="font-mono text-sm border border-[#1A1A1A] text-[#8B0000] px-4 py-2 rounded-full"
               >
                 ✕ Close
               </button>
@@ -239,7 +239,7 @@ export const FolderSection = ({ scrollRef }: FolderSectionProp) => {
             </motion.div>
           ) : (
             selectedFolder && (
-              <div className="flex justify-center w-full bg-white z-20">
+              <div className="flex justify-center w-full bg-[#f3ecdc] z-20">
                 <motion.div
                   key={selectedFolder.id}
                   initial={{ y: 100, opacity: 0 }}
@@ -250,7 +250,7 @@ export const FolderSection = ({ scrollRef }: FolderSectionProp) => {
                     stiffness: 120,
                     damping: 10,
                   }}
-                  className="w-full bg-white pt-[50px]"
+                  className="w-full bg-[#f3ecdc] pt-[50px]"
                   style={{ minHeight: "100vh" }}
                 >
                   <div className="font-mono">
