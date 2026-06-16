@@ -18,9 +18,9 @@ export default function GradientBackground() {
           33% { transform: translate(20px, 40px) scale(0.95); }
           66% { transform: translate(-30px, -20px) scale(1.05); }
         }
-        .blob1 { animation: blob1 12s ease-in-out infinite; }
-        .blob2 { animation: blob2 15s ease-in-out infinite; }
-        .blob3 { animation: blob3 18s ease-in-out infinite; }
+        .blob1 { animation: blob1 18s ease-in-out infinite; }
+        .blob2 { animation: blob2 22s ease-in-out infinite; }
+        .blob3 { animation: blob3 26s ease-in-out infinite; }
       `}</style>
 
       <div
@@ -28,7 +28,7 @@ export default function GradientBackground() {
           position: "fixed",
           inset: 0,
           zIndex: -1,
-          background: "#f3ecdc",
+          background: "#F5F0E8",
           overflow: "hidden",
         }}
       >
@@ -39,10 +39,11 @@ export default function GradientBackground() {
             position: "absolute",
             top: "-20%",
             left: "-10%",
-            width: "60vw",
-            height: "60vw",
+            width: "70vw",
+            height: "70vw",
             borderRadius: "50%",
-            background: "radial-gradient(circle, rgba(139,0,0,0.14) 0%, transparent 70%)",
+            background:
+              "radial-gradient(circle, rgba(139,0,0,0.18) 0%, transparent 70%)",
             filter: "blur(60px)",
           }}
         />
@@ -54,10 +55,11 @@ export default function GradientBackground() {
             position: "absolute",
             top: "30%",
             right: "-15%",
-            width: "50vw",
-            height: "50vw",
+            width: "60vw",
+            height: "60vw",
             borderRadius: "50%",
-            background: "radial-gradient(circle, rgba(26,26,26,0.08) 0%, transparent 70%)",
+            background:
+              "radial-gradient(circle, rgba(26,26,26,0.12) 0%, transparent 70%)",
             filter: "blur(80px)",
           }}
         />
@@ -69,10 +71,11 @@ export default function GradientBackground() {
             position: "absolute",
             bottom: "-10%",
             left: "30%",
-            width: "45vw",
-            height: "45vw",
+            width: "55vw",
+            height: "55vw",
             borderRadius: "50%",
-            background: "radial-gradient(circle, rgba(139,0,0,0.10) 0%, transparent 70%)",
+            background:
+              "radial-gradient(circle, rgba(180,140,80,0.15) 0%, transparent 70%)",
             filter: "blur(70px)",
           }}
         />

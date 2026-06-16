@@ -1,6 +1,5 @@
 "use client";
 import GradientBackground from "./components/gradientBg";
-import AboutSection from "./components/aboutSection";
 import ProjectSection from "./components/projectSection";
 import { useRef, useState } from "react";
 import { Parallax, ParallaxLayer } from "@react-spring/parallax";
@@ -10,43 +9,13 @@ import { motion, AnimatePresence } from "framer-motion";
 export default function Home() {
   const parallaxRef = useRef(null);
   const [isExpanded, setIsExpanded] = useState(false);
-  const [isAboutExpanded, setIsAboutExpanded] = useState(false);
 
   return (
     <>
       <GradientBackground />
 
-      {/* Expanded panels — outside Parallax so they're never clipped */}
+      {/* Expanded Projects panel — outside Parallax */}
       <AnimatePresence>
-        {isAboutExpanded && (
-          <motion.div
-            key="about-expanded"
-            initial={{ opacity: 0, scale: 0.98 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 0.98 }}
-            transition={{ duration: 0.25, ease: "easeOut" }}
-            style={{
-              position: "fixed",
-              top: 0,
-              left: 0,
-              right: 0,
-              bottom: 0,
-              zIndex: 9999,
-              background: "#f3ecdc",
-              overflowY: "auto",
-            }}
-          >
-            <button
-              onClick={() => setIsAboutExpanded(false)}
-              style={{ position: "fixed", top: 24, right: 24, zIndex: 10000 }}
-              className="font-mono text-sm border border-[#1A1A1A] text-[#1A1A1A] px-4 py-2 rounded-full bg-[#f3ecdc]"
-            >
-              ✕ Close
-            </button>
-            <AboutSection onExpand={() => {}} isExpanded={true} />
-          </motion.div>
-        )}
-
         {isExpanded && (
           <motion.div
             key="project-expanded"
@@ -77,9 +46,16 @@ export default function Home() {
         )}
       </AnimatePresence>
 
-      <Parallax ref={parallaxRef} pages={2} style={{ background: "transparent" }}>
+      {/* Folder tabs — fixed, outside Parallax */}
+      <FolderSection
+        scrollRef={parallaxRef}
+        isExpanded={isExpanded}
+        setIsExpanded={setIsExpanded}
+        isAboutExpanded={false}
+        setIsAboutExpanded={() => {}}
+      />
 
-        {/* Hero */}
+      <Parallax ref={parallaxRef} pages={1} style={{ background: "transparent" }}>
         <ParallaxLayer offset={0} speed={0.3}>
           <section
             style={{ height: "100vh" }}
@@ -93,20 +69,6 @@ export default function Home() {
             </p>
           </section>
         </ParallaxLayer>
-
-        {/* Folder tabs — peek at bottom of viewport on load */}
-        <ParallaxLayer offset={0.72} speed={0} style={{ zIndex: 10 }}>
-          <section id="projects">
-            <FolderSection
-              scrollRef={parallaxRef}
-              isExpanded={isExpanded}
-              setIsExpanded={setIsExpanded}
-              isAboutExpanded={isAboutExpanded}
-              setIsAboutExpanded={setIsAboutExpanded}
-            />
-          </section>
-        </ParallaxLayer>
-
       </Parallax>
     </>
   );
