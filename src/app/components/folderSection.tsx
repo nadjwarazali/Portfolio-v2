@@ -33,6 +33,28 @@ const desktopShapes = [
   },
 ];
 
+// Tablet: viewBox 1000×100, 7-step staircase (7px wide × 6px tall per step)
+const tabletShapes = [
+  {
+    viewBox: "0 0 1000 100",
+    fill: "M0,45 H220 V39 H227 V33 H234 V27 H241 V21 H248 V15 H255 V9 H262 V3 H430 V9 H437 V15 H444 V21 H451 V27 H458 V33 H465 V39 H472 V45 H1000 V100 H0 Z",
+    stroke:
+      "M0,45 H220 V39 H227 V33 H234 V27 H241 V21 H248 V15 H255 V9 H262 V3 H430 V9 H437 V15 H444 V21 H451 V27 H458 V33 H465 V39 H472 V45 H1000",
+  },
+  {
+    viewBox: "0 0 1000 100",
+    fill: "M0,45 H400 V39 H407 V33 H414 V27 H421 V21 H428 V15 H435 V9 H442 V3 H610 V9 H617 V15 H624 V21 H631 V27 H638 V33 H645 V39 H652 V45 H1000 V100 H0 Z",
+    stroke:
+      "M0,45 H400 V39 H407 V33 H414 V27 H421 V21 H428 V15 H435 V9 H442 V3 H610 V9 H617 V15 H624 V21 H631 V27 H638 V33 H645 V39 H652 V45 H1000",
+  },
+  {
+    viewBox: "0 0 1000 100",
+    fill: "M0,45 H575 V39 H582 V33 H589 V27 H596 V21 H603 V15 H610 V9 H617 V3 H785 V9 H792 V15 H799 V21 H806 V27 H813 V33 H820 V39 H827 V45 H1000 V100 H0 Z",
+    stroke:
+      "M0,45 H575 V39 H582 V33 H589 V27 H596 V21 H603 V15 H610 V9 H617 V3 H785 V9 H792 V15 H799 V21 H806 V27 H813 V33 H820 V39 H827 V45 H1000",
+  },
+];
+
 const mobileShapes = [
   {
     viewBox: "0 0 430 79",
@@ -58,6 +80,12 @@ const desktopHighlights = [
   "M620,16 H640 V26 H620 Z M610,26 H620 V36 H610 Z M600,36 H610 V46 H600 Z",
   "M1009,16 H1029 V26 H1009 Z M999,26 H1009 V36 H999 Z M989,36 H999 V46 H989 Z",
   "M1389,16 H1409 V26 H1389 Z M1379,26 H1389 V36 H1379 Z M1369,36 H1379 V46 H1369 Z",
+];
+
+const tabletHighlights = [
+  "M272,9 H282 V16 H272 Z M262,16 H272 V23 H262 Z M252,23 H262 V30 H252 Z",
+  "M452,9 H462 V16 H452 Z M442,16 H452 V23 H442 Z M432,23 H442 V30 H432 Z",
+  "M627,9 H637 V16 H627 Z M617,16 H627 V23 H617 Z M607,23 H617 V30 H607 Z",
 ];
 
 const mobileHighlights = [
@@ -132,9 +160,14 @@ export const FolderSection = ({
 
   const parallaxRef = scrollRef;
   const [isMobile, setIsMobile] = useState(false);
+  const [isTablet, setIsTablet] = useState(false);
 
   useEffect(() => {
-    const check = () => setIsMobile(window.innerWidth <= 768);
+    const check = () => {
+      const w = window.innerWidth;
+      setIsMobile(w <= 768);
+      setIsTablet(w > 768 && w <= 1024);
+    };
     check();
     window.addEventListener("resize", check);
     return () => window.removeEventListener("resize", check);
@@ -185,6 +218,27 @@ export const FolderSection = ({
         return null;
     }
   };
+
+  const shapes = isMobile
+    ? mobileShapes
+    : isTablet
+      ? tabletShapes
+      : desktopShapes;
+  const highlights = isMobile
+    ? mobileHighlights
+    : isTablet
+      ? tabletHighlights
+      : desktopHighlights;
+  const tabOffset = isMobile ? 30 : isTablet ? 36 : 44;
+  const strokeWidth = isMobile ? "3" : isTablet ? "4" : "5";
+  const labelFontSize = isMobile ? "8px" : isTablet ? "9px" : "10px";
+  const containerPaddingBottom = isMobile
+    ? `calc(${2 * 21}px + 16.2791%)`
+    : isTablet
+      ? `calc(${2 * 36}px + 6.5%)`
+      : `calc(${2 * 44}px + 4.5045%)`;
+  const peekPaddingBottom = isMobile ? "80px" : isTablet ? "150px" : "180px";
+
   return (
     <LayoutGroup>
       {/* Slide-up content panel */}
@@ -310,7 +364,7 @@ export const FolderSection = ({
               paddingTop: "20px",
               paddingLeft: "32px",
               paddingRight: "32px",
-              paddingBottom: isMobile ? "80px" : "180px",
+              paddingBottom: peekPaddingBottom,
               background: isDark ? "#0a1230" : "#F5F0E8",
               borderTop: `3px solid ${isDark ? darkTabColors[hoverTabIndex] : tabColors[hoverTabIndex]}`,
             }}
@@ -356,11 +410,7 @@ export const FolderSection = ({
         >
           <div
             className="relative"
-            style={{
-              paddingBottom: isMobile
-                ? `calc(${2 * 21}px + 16.2791%)`
-                : `calc(${2 * 44}px + 4.5045%)`,
-            }}
+            style={{ paddingBottom: containerPaddingBottom }}
           >
             {folderTabs.map((tab, i) => {
               const isHover = hoverId === tab.id;
@@ -370,7 +420,7 @@ export const FolderSection = ({
                   key={tab.id}
                   className="absolute left-0 right-0"
                   style={{
-                    top: isMobile ? `${i * 30}px` : `${i * 44}px`,
+                    top: `${i * tabOffset}px`,
                     zIndex: 10 + i,
                   }}
                 >
@@ -396,43 +446,27 @@ export const FolderSection = ({
                       >
                         <svg
                           style={{ ...svgStyle }}
-                          viewBox={
-                            isMobile
-                              ? mobileShapes[i].viewBox
-                              : desktopShapes[i].viewBox
-                          }
+                          viewBox={shapes[i].viewBox}
                           xmlns="http://www.w3.org/2000/svg"
                         >
                           <path
-                            d={
-                              isMobile
-                                ? mobileShapes[i].fill
-                                : desktopShapes[i].fill
-                            }
+                            d={shapes[i].fill}
                             fill={isDark ? darkTabColors[i] : tabColors[i]}
                             shapeRendering="crispEdges"
                           />
                           <path
-                            d={
-                              isMobile
-                                ? mobileShapes[i].stroke
-                                : desktopShapes[i].stroke
-                            }
+                            d={shapes[i].stroke}
                             stroke={
                               isDark
                                 ? darkTabStrokeColors[i]
                                 : tabStrokeColors[i]
                             }
-                            strokeWidth={isMobile ? "3" : "5"}
+                            strokeWidth={strokeWidth}
                             fill="none"
                             shapeRendering="crispEdges"
                           />
                           <path
-                            d={
-                              isMobile
-                                ? mobileHighlights[i]
-                                : desktopHighlights[i]
-                            }
+                            d={highlights[i]}
                             fill={
                               isDark
                                 ? darkHighlightColors[i]
@@ -469,7 +503,7 @@ export const FolderSection = ({
                           <span
                             style={{
                               fontFamily: "'Press Start 2P', monospace",
-                              fontSize: isMobile ? "8px" : "10px",
+                              fontSize: labelFontSize,
                               color: isDark ? "#06091a" : "#ffffff",
                               lineHeight: 1.8,
                             }}
