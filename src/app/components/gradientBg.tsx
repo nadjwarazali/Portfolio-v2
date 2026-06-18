@@ -27,11 +27,11 @@ export default function GradientBackground({ isDark = false }: { isDark?: boolea
           position: "fixed",
           inset: 0,
           zIndex: -1,
-          background: isDark ? "#06091a" : "#F5F0E8",
+          background: isDark ? "#060d1f" : "#d9eef7",
           overflow: "hidden",
         }}
       >
-        {/* Blob 1 */}
+        {/* Blob 1 — sun warmth / deep indigo */}
         <div
           className="blob1"
           style={{
@@ -42,13 +42,13 @@ export default function GradientBackground({ isDark = false }: { isDark?: boolea
             height: "70vw",
             borderRadius: "50%",
             background: isDark
-              ? "radial-gradient(circle, rgba(255,22,84,0.28) 0%, transparent 70%)"
-              : "radial-gradient(circle, rgba(139,0,0,0.18) 0%, transparent 70%)",
+              ? "radial-gradient(circle, rgba(79,70,229,0.32) 0%, transparent 70%)"
+              : "radial-gradient(circle, rgba(251,191,36,0.28) 0%, transparent 70%)",
             filter: "blur(60px)",
           }}
         />
 
-        {/* Blob 2 */}
+        {/* Blob 2 — sky blue / twilight cyan */}
         <div
           className="blob2"
           style={{
@@ -59,13 +59,13 @@ export default function GradientBackground({ isDark = false }: { isDark?: boolea
             height: "60vw",
             borderRadius: "50%",
             background: isDark
-              ? "radial-gradient(circle, rgba(0,194,255,0.22) 0%, transparent 70%)"
-              : "radial-gradient(circle, rgba(26,26,26,0.12) 0%, transparent 70%)",
+              ? "radial-gradient(circle, rgba(0,194,255,0.2) 0%, transparent 70%)"
+              : "radial-gradient(circle, rgba(56,189,248,0.32) 0%, transparent 70%)",
             filter: "blur(80px)",
           }}
         />
 
-        {/* Blob 3 */}
+        {/* Blob 3 — horizon lavender / moonlit purple */}
         <div
           className="blob3"
           style={{
@@ -76,8 +76,8 @@ export default function GradientBackground({ isDark = false }: { isDark?: boolea
             height: "55vw",
             borderRadius: "50%",
             background: isDark
-              ? "radial-gradient(circle, rgba(10,255,173,0.18) 0%, transparent 70%)"
-              : "radial-gradient(circle, rgba(180,140,80,0.15) 0%, transparent 70%)",
+              ? "radial-gradient(circle, rgba(139,92,246,0.22) 0%, transparent 70%)"
+              : "radial-gradient(circle, rgba(186,230,253,0.5) 0%, transparent 70%)",
             filter: "blur(70px)",
           }}
         />
