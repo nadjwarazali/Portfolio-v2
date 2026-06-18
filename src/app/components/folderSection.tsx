@@ -3,73 +3,78 @@ import { motion, AnimatePresence, LayoutGroup } from "framer-motion";
 import { folderTabs } from "../data/folders";
 import AboutSection from "./aboutSection";
 import ProjectSection from "./projectSection";
+import ExperimentSection from "./experimentSection";
 
-// Each shape is a horizontal line running the full width of the viewBox,
-// with a raised "folder tab" bump sitting on the line at a fixed position.
-// These paths are taken directly from the original folder SVGs, just
-// cropped to the visible line+tab band (full bodies were blank below it).
+const svgStyle = {
+  width: "100%",
+  display: "block",
+  imageRendering: "pixelated" as const,
+  shapeRendering: "crispEdges" as const,
+};
+
 const desktopShapes = [
   {
     viewBox: "0 0 2220 350",
-    fill: "M950.902 61.371C954.168 72.4188 964.315 80 975.835 80H2218C2219.07 80 2219.94 80.838 2219.99 81.8926C2220 81.9279 2220 81.9637 2220 82V350H0V82C1.07626e-06 81.9519 0.00323147 81.9047 0.00976562 81.8584C0.00815227 81.8698 0.00610839 81.8811 0.00488281 81.8926C0.0607527 80.838 0.931505 80 2 80H552.165C563.685 80 573.832 72.4188 577.098 61.3709L589.438 19.629C592.704 8.58123 602.851 1 614.371 1H913.629C925.149 1 935.296 8.58125 938.562 19.6291L950.902 61.371Z",
+    fill: "M0,80 H540 V70 H550 V60 H560 V50 H570 V40 H580 V30 H590 V20 H600 V10 H610 V2 H914 V10 H924 V20 H934 V30 H944 V40 H954 V50 H964 V60 H974 V70 H984 V80 H2220 V350 H0 Z",
     stroke:
-      "M0 81H552.49C564.403 81 574.792 72.9042 577.702 61.3526L587.959 20.6475C590.869 9.09586 601.258 1 613.171 1H914.738C926.651 1 937.04 9.0959 939.95 20.6475L950.207 61.3525C953.117 72.9041 963.506 81 975.419 81H2220",
+      "M0,350 V80 H540 V70 H550 V60 H560 V50 H570 V40 H580 V30 H590 V20 H600 V10 H610 V2 H914 V10 H924 V20 H934 V30 H944 V40 H954 V50 H964 V60 H974 V70 H984 V80 H2220 V350",
   },
   {
     viewBox: "0 0 2220 300",
-    fill: "M1338.2 61.3707C1341.46 72.4186 1351.61 80 1363.13 80H2218C2219.07 80 2219.94 80.838 2219.99 81.8926C2220 81.9279 2220 81.9637 2220 82V300H0V82C1.07626e-06 81.9519 0.00323147 81.9047 0.00976562 81.8584C0.00815227 81.8698 0.00610839 81.8811 0.00488281 81.8926C0.0607527 80.838 0.931505 80 2 80H938.87C950.39 80 960.537 72.4187 963.803 61.3707L976.438 18.6293C979.704 7.58135 989.851 0 1001.37 0H1300.63C1312.15 0 1322.3 7.58135 1325.56 18.6293L1338.2 61.3707Z",
+    fill: "M0,80 H929 V70 H939 V60 H949 V50 H959 V40 H969 V30 H979 V20 H989 V10 H999 V2 H1301 V10 H1311 V20 H1321 V30 H1331 V40 H1341 V50 H1351 V60 H1361 V70 H1371 V80 H2220 V300 H0 Z",
     stroke:
-      "M0 81.0001L939.081 81C950.994 81 961.383 72.9042 964.293 61.3526L974.55 20.6475C977.46 9.09585 987.849 1 999.762 1L1301.74 1.00005C1313.65 1.00006 1324.04 9.09595 1326.95 20.6476L1337.21 61.3526C1340.12 72.9042 1350.51 81.0001 1362.42 81.0001H2220",
+      "M0,300 V80 H929 V70 H939 V60 H949 V50 H959 V40 H969 V30 H979 V20 H989 V10 H999 V2 H1301 V10 H1311 V20 H1321 V30 H1331 V40 H1341 V50 H1351 V60 H1361 V70 H1371 V80 H2220 V300",
   },
   {
     viewBox: "0 0 2220 300",
-    fill: "M1716.91 61.3531C1720.17 72.4098 1730.32 80 1741.85 80H2218C2219.07 80.0001 2219.94 80.8381 2219.99 81.8926C2220 81.9279 2220 81.9637 2220 82V300H0V82C3.08372e-06 81.8623 0.0269744 81.7308 0.0771484 81.6113C0.0400458 81.6993 0.0154191 81.7939 0.00488281 81.8926C0.0607575 80.838 0.931508 80 2 80H1319.15C1330.68 80 1340.83 72.4098 1344.09 61.3531L1356.38 19.6469C1359.64 8.59017 1369.8 1 1381.32 1H1679.68C1691.2 1 1701.36 8.59016 1704.62 19.6469L1716.91 61.3531Z",
+    fill: "M0,80 H1309 V70 H1319 V60 H1329 V50 H1339 V40 H1349 V30 H1359 V20 H1369 V10 H1379 V2 H1680 V10 H1690 V20 H1700 V30 H1710 V40 H1720 V50 H1730 V60 H1740 V70 H1750 V80 H2220 V300 H0 Z",
     stroke:
-      "M0 81H1319.49C1331.4 81 1341.79 72.9042 1344.7 61.3526L1354.96 20.6474C1357.87 9.09585 1368.26 1 1380.17 1H1680.74C1692.65 1 1703.04 9.0959 1705.95 20.6475L1716.21 61.3525C1719.12 72.9041 1729.51 81 1741.42 81H2220",
-  },
-  {
-    viewBox: "0 0 2221 300",
-    fill: "M1083.86 61.7826C1087.1 72.8747 1097.27 80.5 1108.82 80.5H2218C2219.07 80.5001 2219.94 81.3381 2219.99 82.3926C2220 82.4279 2220 82.4637 2220 82.5V300H1V82.5C3.08372e-06 82.3623 0.0269744 82.2308 0.0771484 82.1113C0.0400458 82.1993 0.0154191 82.2939 0.00488281 82.3926C0.0607575 81.338 0.931508 80.5 2 80.5H689.995C701.55 80.5 711.718 72.8747 714.955 61.7827L727.083 20.2174C730.319 9.12535 740.487 1.5 752.042 1.5H1046.78C1058.33 1.5 1068.5 9.12534 1071.74 20.2173L1083.86 61.7826Z",
-    stroke:
-      "M1 81H690.49C702.403 81 712.792 72.9042 715.702 61.3526L725.959 20.6474C728.869 9.09585 739.258 1 751.171 1H1047.74C1059.65 1 1070.04 9.0959 1072.95 20.6475L1083.21 61.3525C1086.12 72.9041 1096.51 81 1108.42 81H2221",
+      "M0,300 V80 H1309 V70 H1319 V60 H1329 V50 H1339 V40 H1349 V30 H1359 V20 H1369 V10 H1379 V2 H1680 V10 H1690 V20 H1700 V30 H1710 V40 H1720 V50 H1730 V60 H1740 V70 H1750 V80 H2220 V300",
   },
 ];
 
 const mobileShapes = [
   {
-    viewBox: "0 0 430 180",
-    fill: "M228.719 36.678C232.086 47.5713 242.157 55 253.559 55H428C429.068 55 429.938 55.8381 429.994 56.8926C429.998 56.9279 430 56.9637 430 57V180H0V57C6.24178e-06 56.9522 0.00425775 56.9054 0.0107422 56.8594C0.00917491 56.8705 0.00608008 56.8814 0.00488281 56.8926C0.0608075 55.8381 0.931542 55 2 55H6.87805C18.5213 55 28.745 47.2593 31.9032 36.0526L36.1602 20.9474C39.3185 9.74069 49.5422 2 61.1854 2H198.823C210.225 2 220.296 9.42867 223.663 20.322L228.719 36.678Z",
+    viewBox: "0 0 430 79",
+    fill: "M0,38 H6 V34 H11 V30 H16 V26 H21 V22 H26 V18 H31 V14 H36 V10 H41 V6 H46 V2 H199 V6 H204 V10 H209 V14 H214 V18 H219 V22 H224 V26 H229 V30 H234 V34 H239 V38 H430 V79 H0 Z",
     stroke:
-      "M0 55.6034H5.22559C16.19 55.6034 25.976 48.7251 29.6892 38.4086L36.5918 19.2308C40.2939 8.94519 50.0343 2.07379 60.9658 2.0361L198.669 1.56129C209.386 1.52433 219.028 8.06708 222.953 18.0398L231.015 38.5259C234.928 48.4681 244.524 55.0045 255.209 55.0045L430 55.0046",
+      "M0,38 H6 V34 H11 V30 H16 V26 H21 V22 H26 V18 H31 V14 H36 V10 H41 V6 H46 V2 H199 V6 H204 V10 H209 V14 H214 V18 H219 V22 H224 V26 H229 V30 H234 V34 H239 V38 H430",
   },
   {
-    viewBox: "0 0 430 180",
-    fill: "M329.719 36.178C333.086 47.0713 343.157 54.5 354.559 54.5H428C429.068 54.5 429.938 55.338 429.994 56.3926C429.998 56.4279 430 56.4637 430 56.5V180H0V56.5C1.07626e-06 56.4519 0.00323147 56.4047 0.00976562 56.3584C0.00815227 56.3698 0.00610839 56.3811 0.00488281 56.3926C0.0607527 55.338 0.931505 54.5 2 54.5H107.878C119.521 54.5 129.745 46.7593 132.903 35.5526L137.16 20.4474C140.319 9.24069 150.542 1.5 162.185 1.5H299.823C311.225 1.5 321.296 8.92867 324.663 19.822L329.719 36.178Z",
+    viewBox: "0 0 430 79",
+    fill: "M0,38 H172 V34 H177 V30 H182 V26 H187 V22 H192 V18 H197 V14 H202 V10 H207 V6 H212 V2 H360 V6 H365 V10 H370 V14 H375 V18 H380 V22 H385 V26 H390 V30 H395 V34 H400 V38 H430 V79 H0 Z",
     stroke:
-      "M0 55.1034H106.226C117.19 55.1034 126.976 48.2251 130.689 37.9086L137.592 18.7308C141.294 8.44518 151.034 1.57379 161.966 1.5361L299.669 1.06129C310.386 1.02433 320.028 7.56708 323.953 17.5397L332.015 38.0259C335.928 47.9681 345.524 54.5045 356.209 54.5045H430",
+      "M0,38 H172 V34 H177 V30 H182 V26 H187 V22 H192 V18 H197 V14 H202 V10 H207 V6 H212 V2 H360 V6 H365 V10 H370 V14 H375 V18 H380 V22 H385 V26 H390 V30 H395 V34 H400 V38 H430",
   },
   {
-    viewBox: "0 0 430 180",
-    fill: "M49.2813 36.178C45.9143 47.0713 35.8427 54.5 24.4409 54.5H2C0.931546 54.5 0.0618089 55.3381 0.00585938 56.3926C0.00208522 56.4279 3.92937e-06 56.4637 0 56.5V180H430V56.5C430 56.4522 429.996 56.4054 429.989 56.3594C429.991 56.3705 429.994 56.3814 429.995 56.3926C429.939 55.3381 429.068 54.5 428 54.5H271.122C259.479 54.5 249.255 46.7593 246.097 35.5526L241.84 20.4474C238.681 9.24069 228.458 1.5 216.815 1.5H79.1773C67.7754 1.5 57.7039 8.92867 54.3368 19.822L49.2813 36.178Z",
+    viewBox: "0 0 430 79",
+    fill: "M0,38 H29 V34 H34 V30 H39 V26 H44 V22 H49 V18 H54 V14 H59 V10 H64 V6 H69 V2 H217 V6 H222 V10 H227 V14 H232 V18 H237 V22 H242 V26 H247 V30 H252 V34 H257 V38 H430 V79 H0 Z",
     stroke:
-      "M430 55.1035H272.275C261.31 55.1035 251.524 48.2252 247.811 37.9087L240.908 18.7305C237.206 8.44513 227.466 1.57377 216.535 1.53587L79.7747 1.06164C69.0575 1.02447 59.4155 7.56725 55.4907 17.5401L47.4286 38.0259C43.5159 47.9681 33.9192 54.5045 23.2348 54.5045H0",
-  },
-  {
-    viewBox: "0 0 430 180",
-    fill: "M201.281 36.178C197.914 47.0713 187.843 54.5 176.441 54.5H2C0.931549 54.5 0.0617981 55.3381 0.00585938 56.3926C0.0020752 56.4279 0 56.4637 0 56.5V180H430V56.5C430 56.4522 429.996 56.4054 429.989 56.3594C429.991 56.3705 429.994 56.3814 429.995 56.3926C429.939 55.3381 429.068 54.5 428 54.5H423.122C411.479 54.5 401.255 46.7593 398.097 35.5526L393.84 20.4474C390.681 9.24069 380.458 1.5 368.815 1.5H231.177C219.775 1.5 209.704 8.92867 206.337 19.822L201.281 36.178Z",
-    stroke:
-      "M430 55.1034H424.774C413.81 55.1034 404.024 48.2251 400.311 37.9086L393.408 18.7308C389.706 8.44519 379.966 1.57379 369.034 1.5361L231.331 1.06129C220.614 1.02433 210.972 7.56708 207.047 17.5398L198.985 38.0259C195.072 47.9681 185.476 54.5045 174.791 54.5045L0 54.5046",
+      "M430,38 H257 V34 H252 V30 H247 V26 H242 V22 H237 V18 H232 V14 H227 V10 H222 V6 H217 V2 H69 V6 H64 V10 H59 V14 H54 V18 H49 V22 H44 V26 H39 V30 H34 V34 H29 V38 H0",
   },
 ];
 
-const tabColors = ["#8B2635", "#3D5A3E", "#1B3A5C"];
+const desktopHighlights = [
+  "M620,16 H640 V26 H620 Z M610,26 H620 V36 H610 Z M600,36 H610 V46 H600 Z",
+  "M1009,16 H1029 V26 H1009 Z M999,26 H1009 V36 H999 Z M989,36 H999 V46 H989 Z",
+  "M1389,16 H1409 V26 H1389 Z M1379,26 H1389 V36 H1379 Z M1369,36 H1379 V46 H1369 Z",
+];
 
-const tabWidths = ["96%", "99%", "100%"];
+const mobileHighlights = [
+  "M55,8 H65 V12 H55 Z M50,12 H55 V16 H50 Z M45,16 H50 V20 H45 Z",
+  "M221,8 H231 V12 H221 Z M216,12 H221 V16 H216 Z M211,16 H216 V20 H211 Z",
+  "M78,8 H88 V12 H78 Z M73,12 H78 V16 H73 Z M68,16 H73 V20 H68 Z",
+];
 
-const svgStyle: React.CSSProperties = {
-  width: "100%",
-  height: "auto",
-};
+const tabColors = ["#973535", "#1f7522", "#2a5d93"];
+const tabStrokeColors = ["#6A2525", "#2B3F2B", "#132940"];
+const highlightColors = ["#C4556A", "#6A9B6C", "#3D6A9B"];
+
+const darkTabColors = ["#FF1654", "#0AFFAD", "#00C2FF"];
+const darkTabStrokeColors = ["#CC0040", "#00CC88", "#0099CC"];
+const darkHighlightColors = ["#FF6B8A", "#5DFFD0", "#5DD9FF"];
+
+const tabWidths = ["98%", "99%", "100%"];
 
 type FolderSectionProp = {
   scrollRef: React.RefObject<{
@@ -80,6 +85,8 @@ type FolderSectionProp = {
   setIsExpanded: (v: boolean) => void;
   isAboutExpanded: boolean;
   setIsAboutExpanded: (v: boolean) => void;
+  isDark: boolean;
+  onFolderOpen?: (isOpen: boolean) => void;
 };
 export const FolderSection = ({
   scrollRef,
@@ -87,9 +94,16 @@ export const FolderSection = ({
   setIsExpanded,
   isAboutExpanded,
   setIsAboutExpanded,
+  isDark,
+  onFolderOpen,
 }: FolderSectionProp) => {
   const [selectedFolder, setSelectedFolder] = useState<Folder | null>(null);
   const [hoverId, setHoverId] = useState<string | null>(null);
+  const [nameHovered, setNameHovered] = useState(false);
+
+  useEffect(() => {
+    onFolderOpen?.(selectedFolder !== null);
+  }, [selectedFolder, onFolderOpen]);
 
   useEffect(() => {
     const parallaxContainer = scrollRef.current?.container?.current;
@@ -142,18 +156,31 @@ export const FolderSection = ({
     setSelectedFolder((prev) => (prev?.id === tab.id ? null : tab));
   };
 
+  const hoverTab = hoverId
+    ? (folderTabs.find((t) => t.id === hoverId) ?? null)
+    : null;
+  const hoverTabIndex = hoverId
+    ? folderTabs.findIndex((t) => t.id === hoverId)
+    : -1;
+
   const renderContent = () => {
     switch (selectedFolder?.id) {
       case "01":
-        return <AboutSection />;
-      case "02":
-        return <ProjectSection onExpand={() => setIsExpanded(true)} />;
-      case "03":
         return (
-          <p className="mt-5 text-gray-700 p-10">
-            Nothing here yet. Stay tuned!
-          </p>
+          <div style={{ height: "100%", overflowY: "auto" }}>
+            <AboutSection isDark={isDark} />
+            <div style={{ height: isMobile ? "200px" : "280px" }} />
+          </div>
         );
+      case "02":
+        return (
+          <ProjectSection
+            onExpand={() => setIsExpanded(true)}
+            isDark={isDark}
+          />
+        );
+      case "03":
+        return <ExperimentSection isDark={isDark} />;
       default:
         return null;
     }
@@ -168,7 +195,7 @@ export const FolderSection = ({
             initial={{ y: "100%" }}
             animate={{ y: "0%" }}
             exit={{ y: "100%" }}
-            transition={{ type: "spring", stiffness: 300, damping: 30 }}
+            transition={{ type: "tween", duration: 0.15 }}
             style={{
               position: "fixed",
               top: 0,
@@ -176,25 +203,137 @@ export const FolderSection = ({
               right: 0,
               bottom: 0,
               zIndex: 15,
-              background: "#f3ecdc",
-              overflowY: "auto",
-              paddingBottom: "200px",
+              background: isDark ? "#0a1230" : "#F5F0E8",
+              borderTop: `4px solid ${isDark ? "#F5F0E8" : "#1A1A1A"}`,
+              overflow: "hidden",
+              display: "flex",
+              flexDirection: "column",
             }}
           >
-            <button
-              onClick={() => setSelectedFolder(null)}
+            {/* Header: name/email left, close right */}
+            <div
               style={{
-                position: "sticky",
-                top: 24,
-                float: "right",
-                marginRight: 24,
+                flexShrink: 0,
                 zIndex: 16,
+                background: isDark ? "#0a1230" : "#F5F0E8",
+                borderBottom: `1px solid ${isDark ? "#1e2d50" : "#C8BFB0"}`,
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "space-between",
+                padding: "16px 24px",
               }}
-              className="font-mono text-sm border border-[#1A1A1A] text-[#1A1A1A] px-4 py-2 rounded-full bg-[#f3ecdc]"
             >
-              ✕
-            </button>
-            <div className="font-mono pt-8">{renderContent()}</div>
+              <a
+                href={nameHovered ? "mailto:nadjwarazali@gmail.com" : undefined}
+                onMouseEnter={() => setNameHovered(true)}
+                onMouseLeave={() => setNameHovered(false)}
+                style={{
+                  cursor: nameHovered ? "pointer" : "default",
+                  textDecoration: "none",
+                  minWidth: 160,
+                }}
+              >
+                <AnimatePresence mode="wait">
+                  {nameHovered ? (
+                    <motion.p
+                      key="email"
+                      initial={{ opacity: 0, y: -3 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: 3 }}
+                      transition={{ duration: 0.1 }}
+                      style={{
+                        fontFamily: "'Press Start 2P', monospace",
+                        fontSize: "10px",
+                        color: isDark ? "#0AFFAD" : "#8B0000",
+                        lineHeight: 1.8,
+                      }}
+                    >
+                      nadjwarazali@gmail.com
+                    </motion.p>
+                  ) : (
+                    <motion.p
+                      key="name"
+                      initial={{ opacity: 0, y: 3 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -3 }}
+                      transition={{ duration: 0.1 }}
+                      style={{
+                        fontFamily: "'Press Start 2P', monospace",
+                        fontSize: "14px",
+                        color: isDark ? "#F5F0E8" : "#1A1A1A",
+                        lineHeight: 1.8,
+                      }}
+                    >
+                      Nadjwa Razali
+                    </motion.p>
+                  )}
+                </AnimatePresence>
+              </a>
+              <button
+                onClick={() => setSelectedFolder(null)}
+                style={{
+                  fontFamily: "'Press Start 2P', monospace",
+                  fontSize: "10px",
+                  border: `3px solid ${isDark ? "#F5F0E8" : "#1A1A1A"}`,
+                  padding: "8px 12px",
+                  background: isDark ? "#0a1230" : "#F5F0E8",
+                  cursor: "pointer",
+                  color: isDark ? "#F5F0E8" : "#1A1A1A",
+                  flexShrink: 0,
+                }}
+              >
+                ✕
+              </button>
+            </div>
+            <div style={{ flex: 1, overflow: "hidden", minHeight: 0 }}>
+              {renderContent()}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Hover peek — peeks up behind tab stack on hover */}
+      <AnimatePresence>
+        {hoverId && !selectedFolder && hoverTab && (
+          <motion.div
+            key={hoverId}
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 10 }}
+            transition={{ type: "tween", duration: 0.12 }}
+            style={{
+              position: "fixed",
+              bottom: 0,
+              left: 0,
+              right: 0,
+              zIndex: 9,
+              paddingTop: "20px",
+              paddingLeft: "32px",
+              paddingRight: "32px",
+              paddingBottom: isMobile ? "80px" : "180px",
+              background: isDark ? "#0a1230" : "#F5F0E8",
+              borderTop: `3px solid ${isDark ? darkTabColors[hoverTabIndex] : tabColors[hoverTabIndex]}`,
+            }}
+          >
+            <p
+              style={{
+                fontFamily: "'Press Start 2P', monospace",
+                fontSize: "10px",
+                color: isDark ? "#F5F0E8" : "#1A1A1A",
+                marginBottom: 8,
+              }}
+            >
+              {hoverTab.label}
+            </p>
+            <p
+              style={{
+                fontFamily: "monospace",
+                fontSize: "12px",
+                color: isDark ? "#A09A95" : "#6B6560",
+              }}
+            >
+              {hoverTab.subtitle}
+            </p>
           </motion.div>
         )}
       </AnimatePresence>
@@ -219,8 +358,8 @@ export const FolderSection = ({
             className="relative"
             style={{
               paddingBottom: isMobile
-                ? `calc(${2 * 45}px + 16.2791%)`
-                : `calc(${2 * 38}px + 4.5045%)`,
+                ? `calc(${2 * 21}px + 16.2791%)`
+                : `calc(${2 * 44}px + 4.5045%)`,
             }}
           >
             {folderTabs.map((tab, i) => {
@@ -229,91 +368,125 @@ export const FolderSection = ({
               return (
                 <div
                   key={tab.id}
-                  className="absolute left-0 right-0 "
-                  style={{ top: isMobile ? `${i * 45}px` : `${i * 38}px` }}
+                  className="absolute left-0 right-0"
+                  style={{
+                    top: isMobile ? `${i * 30}px` : `${i * 44}px`,
+                    zIndex: 10 + i,
+                  }}
                 >
                   <motion.div
-                    className="cursor-pointer relative z-10"
+                    className="cursor-pointer relative"
                     onHoverStart={() => setHoverId(tab.id)}
                     onHoverEnd={() => setHoverId(null)}
                     animate={{
-                      y: isHover ? -16 : isSelected ? -6 : 20,
-                      scale: isSelected ? 1.02 : 1,
+                      y: isSelected ? (isMobile ? -2 : -8) : isHover ? -12 : 0,
                     }}
-                    transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                    transition={{ type: "tween", duration: 0.08 }}
                   >
                     <div
                       className="relative"
                       onClick={handleSelect.bind(null, tab)}
                     >
-                      {/* Mobile shape */}
                       <div
                         style={{
-                          width: tabWidths[i],
+                          width: isMobile ? "100%" : tabWidths[i],
                           margin: "0 auto",
-                          borderRadius: "0 0 0 0",
                           overflow: "hidden",
                         }}
                       >
                         <svg
-                          className="block md:hidden"
-                          style={svgStyle}
-                          viewBox={mobileShapes[i].viewBox}
+                          style={{ ...svgStyle }}
+                          viewBox={
+                            isMobile
+                              ? mobileShapes[i].viewBox
+                              : desktopShapes[i].viewBox
+                          }
                           xmlns="http://www.w3.org/2000/svg"
                         >
-                          <path d={mobileShapes[i].fill} fill={tabColors[i]} />
-                          <path d={mobileShapes[i].stroke} stroke={tabColors[i]} strokeWidth="2" fill="none" />
-                        </svg>
-                      </div>
-
-                      {/* Desktop shape */}
-                      <div
-                        style={{
-                          width: tabWidths[i],
-                          margin: "0 auto",
-                          borderRadius: "0 0 0 0",
-                          overflow: "hidden",
-                        }}
-                      >
-                        <svg
-                          className="hidden md:block"
-                          style={svgStyle}
-                          viewBox={desktopShapes[i].viewBox}
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <path d={desktopShapes[i].fill} fill={tabColors[i]} />
-                          <path d={desktopShapes[i].stroke} stroke={tabColors[i]} strokeWidth="2" fill="none" />
-                        </svg>
-                      </div>
-                    </div>
-                    <div
-                      onClick={handleSelect.bind(null, tab)}
-                      className="absolute font-mono text-sm text-gray-800 items-center bg-transparent cursor-pointer"
-                      style={{
-                        left: `${isMobile ? tab.titlePositionMobile : tab.titlePositionDesktop}%`,
-                        top: "8px",
-                      }}
-                    >
-                      <div className="flex flex-row">
-                        {isSelected && (
-                          <div
-                            className="h-[10px] w-[10px] rounded-full mt-[7px] md:mt-[10px] mr-2"
-                            style={{ background: "#1A1A1A" }}
+                          <path
+                            d={
+                              isMobile
+                                ? mobileShapes[i].fill
+                                : desktopShapes[i].fill
+                            }
+                            fill={isDark ? darkTabColors[i] : tabColors[i]}
+                            shapeRendering="crispEdges"
                           />
-                        )}
-                        <div>
-                          <div
-                            className="text-[16px] font-semibold"
-                            style={{ color: "#ffffff" }}
+                          <path
+                            d={
+                              isMobile
+                                ? mobileShapes[i].stroke
+                                : desktopShapes[i].stroke
+                            }
+                            stroke={
+                              isDark
+                                ? darkTabStrokeColors[i]
+                                : tabStrokeColors[i]
+                            }
+                            strokeWidth={isMobile ? "3" : "5"}
+                            fill="none"
+                            shapeRendering="crispEdges"
+                          />
+                          <path
+                            d={
+                              isMobile
+                                ? mobileHighlights[i]
+                                : desktopHighlights[i]
+                            }
+                            fill={
+                              isDark
+                                ? darkHighlightColors[i]
+                                : highlightColors[i]
+                            }
+                            shapeRendering="crispEdges"
+                          />
+                        </svg>
+                      </div>
+                      <div
+                        className="absolute cursor-pointer"
+                        style={{
+                          left: `${isMobile ? tab.titlePositionMobile : tab.titlePositionDesktop}%`,
+                          top: "8px",
+                        }}
+                      >
+                        <div
+                          style={{
+                            display: "flex",
+                            alignItems: "center",
+                            gap: "8px",
+                          }}
+                        >
+                          {isSelected && (
+                            <div
+                              style={{
+                                width: 8,
+                                height: 8,
+                                background: isDark ? "#06091a" : "#F5F0E8",
+                                flexShrink: 0,
+                              }}
+                            />
+                          )}
+                          <span
+                            style={{
+                              fontFamily: "'Press Start 2P', monospace",
+                              fontSize: isMobile ? "8px" : "10px",
+                              color: isDark ? "#06091a" : "#ffffff",
+                              lineHeight: 1.8,
+                            }}
                           >
                             {tab.label}
-                          </div>
-                          <div
-                            className="hidden md:block text-[12px]"
-                            style={{ color: "#fff0e4" }}
-                          >
-                            {tab.subtitle}
-                          </div>
+                          </span>
+                        </div>
+                        <div
+                          style={{
+                            fontFamily: "monospace",
+                            fontSize: "10px",
+                            color: isDark
+                              ? "rgba(6,9,26,0.65)"
+                              : "rgb(242, 242, 242)",
+                          }}
+                        >
+                          {tab.subtitle}
                         </div>
                       </div>
                     </div>
@@ -324,51 +497,6 @@ export const FolderSection = ({
           </div>
         </div>
       </div>
-      <AnimatePresence>
-        {!tabsVisible && !isExpanded && !isAboutExpanded && (
-          <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: -20 }}
-            transition={{ duration: 0.2 }}
-            className="hidden md:flex"
-            style={{
-              position: "fixed",
-              left: 24,
-              top: "50%",
-              transform: "translateY(-50%)",
-              zIndex: 100,
-              flexDirection: "column",
-              gap: "12px",
-            }}
-          >
-            {folderTabs.map((tab) => (
-              <button
-                key={tab.id}
-                onClick={() => handleSelect(tab)}
-                style={{
-                  fontFamily: "monospace",
-                  fontSize: "11px",
-                  color: selectedFolder?.id === tab.id ? "#8B0000" : "#6B6560",
-                  background: "none",
-                  border: "none",
-                  cursor: "pointer",
-                  textAlign: "left",
-                  padding: "4px 0",
-                  borderLeft:
-                    selectedFolder?.id === tab.id
-                      ? "2px solid #8B0000"
-                      : "2px solid transparent",
-                  paddingLeft: "8px",
-                  transition: "all 0.15s ease",
-                }}
-              >
-                {tab.label}
-              </button>
-            ))}
-          </motion.div>
-        )}
-      </AnimatePresence>
     </LayoutGroup>
   );
 };

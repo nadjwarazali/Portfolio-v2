@@ -6,6 +6,12 @@
   --accent: #8b0000;
 }
 
+[data-theme="dark"] {
+  --background: #06091a;
+  --foreground: #f5f0e8;
+  --accent: #ff1654;
+}
+
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -13,6 +19,15 @@
   --font-sans: var(--font-roboto-sans);
   --font-mono: var(--font-roboto-mono);
   --font-crimson: var(--font-crimson);
+  --font-pixel: var(--font-press-start);
+}
+
+.font-pixel {
+  font-family: var(--font-press-start), monospace;
+}
+
+* {
+  image-rendering: pixelated;
 }
 
 html {

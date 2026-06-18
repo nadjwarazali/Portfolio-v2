@@ -1,17 +1,15 @@
 "use client";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { projects } from "../data/projects";
+import { experiments } from "../data/experiments";
 
-type ProjectSectionProps = {
-  onExpand: () => void;
-  isExpanded?: boolean;
+type ExperimentSectionProps = {
   isDark?: boolean;
 };
 
-export default function ProjectSection({
+export default function ExperimentSection({
   isDark = false,
-}: ProjectSectionProps) {
+}: ExperimentSectionProps) {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   const [expandedIndex, setExpandedIndex] = useState<number | null>(null);
 
@@ -23,12 +21,13 @@ export default function ProjectSection({
   const descCol = isDark ? "#A09A95" : "#4B5563";
   const tagBg = isDark ? "rgba(0,194,255,0.12)" : "rgba(26,26,26,0.08)";
   const tagText = isDark ? "#5DD9FF" : "#1A1A1A";
+  const linkColor = isDark ? "#0AFFAD" : "#8B2635";
   const previewBg = isDark ? "#0d1535" : "#F5F0E8";
   const previewBorder = isDark ? "#1e2d50" : "#C8BFB0";
   const gridLine = isDark ? "rgba(93,217,255,0.07)" : "rgba(26,26,26,0.06)";
 
   const activeIndex = hoveredIndex !== null ? hoveredIndex : expandedIndex;
-  const hovered = activeIndex !== null ? projects[activeIndex] : null;
+  const hovered = activeIndex !== null ? experiments[activeIndex] : null;
 
   return (
     <div style={{ height: "100%", display: "flex", flexDirection: "column" }}>
@@ -42,7 +41,7 @@ export default function ProjectSection({
             marginBottom: 8,
           }}
         >
-          Projects
+          Experiments
         </p>
       </div>
 
@@ -101,16 +100,6 @@ export default function ProjectSection({
                       <p
                         style={{
                           fontFamily: "'Press Start 2P', monospace",
-                          fontSize: "8px",
-                          color: metaCol,
-                          marginBottom: 12,
-                        }}
-                      >
-                        {hovered.company}
-                      </p>
-                      <p
-                        style={{
-                          fontFamily: "'Press Start 2P', monospace",
                           fontSize: "10px",
                           color: titleCol,
                           lineHeight: 1.8,
@@ -118,6 +107,18 @@ export default function ProjectSection({
                       >
                         {hovered.title}
                       </p>
+                      {hovered.url && (
+                        <p
+                          style={{
+                            fontFamily: "monospace",
+                            fontSize: "10px",
+                            color: linkColor,
+                            marginTop: 12,
+                          }}
+                        >
+                          {hovered.url}
+                        </p>
+                      )}
                       <p
                         style={{
                           fontFamily: "monospace",
@@ -152,7 +153,7 @@ export default function ProjectSection({
 
         {/* Right: List — scrolls independently */}
         <div className="flex-1 overflow-y-auto px-6 md:px-10 pt-4 pb-64 md:pb-54">
-          {projects.map((project, i) => (
+          {experiments.map((experiment, i) => (
             <div
               key={i}
               style={{
@@ -173,10 +174,10 @@ export default function ProjectSection({
                   className="text-sm font-semibold"
                   style={{ color: titleCol }}
                 >
-                  {project.title}
+                  {experiment.title}
                 </p>
                 <p className="text-xs shrink-0" style={{ color: metaCol }}>
-                  {project.date}
+                  {experiment.date}
                 </p>
               </div>
 
@@ -190,17 +191,14 @@ export default function ProjectSection({
                     style={{ overflow: "hidden" }}
                   >
                     <div className="pb-4">
-                      <p className="text-xs mb-1" style={{ color: metaCol }}>
-                        {project.company}
-                      </p>
                       <p
                         className="text-sm leading-relaxed"
                         style={{ color: descCol }}
                       >
-                        {project.description}
+                        {experiment.description}
                       </p>
                       <div className="flex flex-row flex-wrap mt-3 gap-1">
-                        {project.categories.map((cat, idx) => (
+                        {experiment.categories.map((cat, idx) => (
                           <span
                             key={idx}
                             className="text-xs px-2 py-1"
@@ -210,6 +208,15 @@ export default function ProjectSection({
                           </span>
                         ))}
                       </div>
+                      {experiment.url && (
+                        <p
+                          className="text-xs mt-3 cursor-pointer"
+                          style={{ color: linkColor }}
+                          onClick={() => window.open(experiment.url!, "_blank")}
+                        >
+                          {experiment.url} →
+                        </p>
+                      )}
                     </div>
                   </motion.div>
                 )}

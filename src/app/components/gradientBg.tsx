@@ -1,5 +1,4 @@
-// components/gradientBackground.tsx
-export default function GradientBackground() {
+export default function GradientBackground({ isDark = false }: { isDark?: boolean }) {
   return (
     <>
       <style>{`
@@ -28,11 +27,11 @@ export default function GradientBackground() {
           position: "fixed",
           inset: 0,
           zIndex: -1,
-          background: "#F5F0E8",
+          background: isDark ? "#06091a" : "#F5F0E8",
           overflow: "hidden",
         }}
       >
-        {/* Blob 1 — dark red */}
+        {/* Blob 1 */}
         <div
           className="blob1"
           style={{
@@ -42,13 +41,14 @@ export default function GradientBackground() {
             width: "70vw",
             height: "70vw",
             borderRadius: "50%",
-            background:
-              "radial-gradient(circle, rgba(139,0,0,0.18) 0%, transparent 70%)",
+            background: isDark
+              ? "radial-gradient(circle, rgba(255,22,84,0.28) 0%, transparent 70%)"
+              : "radial-gradient(circle, rgba(139,0,0,0.18) 0%, transparent 70%)",
             filter: "blur(60px)",
           }}
         />
 
-        {/* Blob 2 — ink */}
+        {/* Blob 2 */}
         <div
           className="blob2"
           style={{
@@ -58,13 +58,14 @@ export default function GradientBackground() {
             width: "60vw",
             height: "60vw",
             borderRadius: "50%",
-            background:
-              "radial-gradient(circle, rgba(26,26,26,0.12) 0%, transparent 70%)",
+            background: isDark
+              ? "radial-gradient(circle, rgba(0,194,255,0.22) 0%, transparent 70%)"
+              : "radial-gradient(circle, rgba(26,26,26,0.12) 0%, transparent 70%)",
             filter: "blur(80px)",
           }}
         />
 
-        {/* Blob 3 — warm sepia accent */}
+        {/* Blob 3 */}
         <div
           className="blob3"
           style={{
@@ -74,8 +75,9 @@ export default function GradientBackground() {
             width: "55vw",
             height: "55vw",
             borderRadius: "50%",
-            background:
-              "radial-gradient(circle, rgba(180,140,80,0.15) 0%, transparent 70%)",
+            background: isDark
+              ? "radial-gradient(circle, rgba(10,255,173,0.18) 0%, transparent 70%)"
+              : "radial-gradient(circle, rgba(180,140,80,0.15) 0%, transparent 70%)",
             filter: "blur(70px)",
           }}
         />
