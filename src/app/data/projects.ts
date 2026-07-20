@@ -6,7 +6,7 @@ export const projects = [
     categories: ["Web App", "NuxtJS", "VueJS", "Tailwind"],
     date: "Jan 2026 – June 2026",
     company: "Bateriku.com",
-    imgSrc: null,
+    imgSrc: "/assets/projects/bateriku/featured.png",
     url: null,
   },
   {
@@ -16,7 +16,7 @@ export const projects = [
     categories: ["Web App", "React", "NextJS", "Looker", "Data Visualization"],
     date: "Nov 2023 – Dec 2025",
     company: "FSBM IDesign",
-    imgSrc: null,
+    imgSrc: "/assets/projects/location-int/featured.png",
     url: null,
   },
   {
@@ -26,7 +26,7 @@ export const projects = [
     categories: ["Mobile App", "Flutter", "Dart", "GetX"],
     date: "May 2021 – Oct 2023",
     company: "Adev Ventures",
-    imgSrc: null,
+    imgSrc: "/assets/projects/vimigo/featured.webp",
     url: "https://vimigo.io/",
   },
   {
@@ -36,7 +36,17 @@ export const projects = [
     categories: ["Web App", "React", "Tailwind", "Startup"],
     date: "Jan 2024 – Aug 2024",
     company: "Compere Technologies",
-    imgSrc: null,
+    imgSrc: "/assets/projects/compere/featured-compere.png",
+    url: null,
+  },
+  {
+    title: "Pawspital",
+    description:
+      "Final year project. A pet tracker app built with Flutter and Firebase.",
+    categories: ["Mobile App", "Flutter", "Firebase"],
+    date: "2019",
+    company: "Final Year Project",
+    imgSrc: "/assets/projects/pawspital/featured.png",
     url: null,
   },
   {

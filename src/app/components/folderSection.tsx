@@ -369,25 +369,50 @@ export const FolderSection = ({
               borderTop: `3px solid ${isDark ? darkTabColors[hoverTabIndex] : tabColors[hoverTabIndex]}`,
             }}
           >
-            <p
+            <div
               style={{
-                fontFamily: "'Press Start 2P', monospace",
-                fontSize: "10px",
-                color: isDark ? "#F5F0E8" : "#1A1A1A",
-                marginBottom: 8,
+                display: "flex",
+                alignItems: "flex-end",
+                justifyContent: "space-between",
+                gap: "16px",
               }}
             >
-              {hoverTab.label}
-            </p>
-            <p
-              style={{
-                fontFamily: "monospace",
-                fontSize: "12px",
-                color: isDark ? "#A09A95" : "#6B6560",
-              }}
-            >
-              {hoverTab.subtitle}
-            </p>
+              <div>
+                <p
+                  style={{
+                    fontFamily: "'Press Start 2P', monospace",
+                    fontSize: "10px",
+                    color: isDark ? "#F5F0E8" : "#1A1A1A",
+                    marginBottom: 8,
+                  }}
+                >
+                  {hoverTab.label}
+                </p>
+                <p
+                  style={{
+                    fontFamily: "monospace",
+                    fontSize: "12px",
+                    color: isDark ? "#A09A95" : "#6B6560",
+                  }}
+                >
+                  {hoverTab.subtitle}
+                </p>
+              </div>
+              <img
+                src={
+                  isMobile
+                    ? `/assets/folder/folder-mobile-${hoverTabIndex}.svg`
+                    : `/assets/folder/folder-${hoverTabIndex}.svg`
+                }
+                alt={hoverTab.label}
+                style={{
+                  height: isMobile ? "60px" : "90px",
+                  width: "auto",
+                  imageRendering: "pixelated",
+                  flexShrink: 0,
+                }}
+              />
+            </div>
           </motion.div>
         )}
       </AnimatePresence>

@@ -97,38 +97,44 @@ export default function ExperimentSection({
                         width: "100%",
                       }}
                     >
-                      <p
-                        style={{
-                          fontFamily: "'Press Start 2P', monospace",
-                          fontSize: "10px",
-                          color: titleCol,
-                          lineHeight: 1.8,
-                        }}
-                      >
-                        {hovered.title}
-                      </p>
-                      {hovered.url && (
-                        <p
-                          style={{
-                            fontFamily: "monospace",
-                            fontSize: "10px",
-                            color: linkColor,
-                            marginTop: 12,
-                          }}
-                        >
-                          {hovered.url}
-                        </p>
+                      {!hovered.imgSrc && (
+                        <>
+                          <p
+                            style={{
+                              fontFamily: "'Press Start 2P', monospace",
+                              fontSize: "10px",
+                              color: titleCol,
+                              lineHeight: 1.8,
+                            }}
+                          >
+                            {hovered.title}
+                          </p>
+                          {hovered.url && (
+                            <p
+                              style={{
+                                fontFamily: "monospace",
+                                fontSize: "10px",
+                                color: linkColor,
+                                marginTop: 12,
+                              }}
+                            >
+                              {hovered.url}
+                            </p>
+                          )}
+                        </>
                       )}
-                      <p
-                        style={{
-                          fontFamily: "monospace",
-                          fontSize: "10px",
-                          color: metaCol,
-                          marginTop: 16,
-                        }}
-                      >
-                        [ preview placeholder ]
-                      </p>
+                      {hovered.imgSrc && (
+                        <img
+                          src={hovered.imgSrc}
+                          alt={hovered.title}
+                          style={{
+                            width: "100%",
+                            marginTop: 16,
+                            objectFit: "cover",
+                            imageRendering: "auto",
+                          }}
+                        />
+                      )}
                     </motion.div>
                   ) : (
                     <motion.p

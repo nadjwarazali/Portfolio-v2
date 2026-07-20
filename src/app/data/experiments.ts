@@ -6,7 +6,7 @@ export const experiments = [
     categories: ["Mobile App", "React Native", "Expo", "Supabase"],
     date: "Ongoing",
     url: "https://strikeapp.my",
-    imgSrc: null,
+    imgSrc: "/assets/projects/awsc/awsc-mascot.svg",
   },
   {
     title: "Nadjwa Razali Portfolio v2",
@@ -15,7 +15,7 @@ export const experiments = [
     categories: ["Web", "NextJS", "Framer Motion", "TypeScript", "Claude"],
     date: "2026",
     url: "https://nadjwarazali.my",
-    imgSrc: null,
+    imgSrc: "/assets/projects/portfolio/featured.png",
   },
   {
     title: "alt-arkib Studio / Portfolio v1",

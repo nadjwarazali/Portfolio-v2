@@ -98,36 +98,42 @@ export default function ProjectSection({
                         width: "100%",
                       }}
                     >
-                      <p
-                        style={{
-                          fontFamily: "'Press Start 2P', monospace",
-                          fontSize: "8px",
-                          color: metaCol,
-                          marginBottom: 12,
-                        }}
-                      >
-                        {hovered.company}
-                      </p>
-                      <p
-                        style={{
-                          fontFamily: "'Press Start 2P', monospace",
-                          fontSize: "10px",
-                          color: titleCol,
-                          lineHeight: 1.8,
-                        }}
-                      >
-                        {hovered.title}
-                      </p>
-                      <p
-                        style={{
-                          fontFamily: "monospace",
-                          fontSize: "10px",
-                          color: metaCol,
-                          marginTop: 16,
-                        }}
-                      >
-                        [ preview placeholder ]
-                      </p>
+                      {!hovered.imgSrc && (
+                        <>
+                          <p
+                            style={{
+                              fontFamily: "'Press Start 2P', monospace",
+                              fontSize: "8px",
+                              color: metaCol,
+                              marginBottom: 12,
+                            }}
+                          >
+                            {hovered.company}
+                          </p>
+                          <p
+                            style={{
+                              fontFamily: "'Press Start 2P', monospace",
+                              fontSize: "10px",
+                              color: titleCol,
+                              lineHeight: 1.8,
+                            }}
+                          >
+                            {hovered.title}
+                          </p>
+                        </>
+                      )}
+                      {hovered.imgSrc && (
+                        <img
+                          src={hovered.imgSrc}
+                          alt={hovered.title}
+                          style={{
+                            width: "100%",
+                            marginTop: 16,
+                            objectFit: "cover",
+                            imageRendering: "auto",
+                          }}
+                        />
+                      )}
                     </motion.div>
                   ) : (
                     <motion.p
